@@ -1,0 +1,175 @@
+@import "../../tokens.css";
+
+@layer components {
+  .ath-button {
+    border-radius: var(--radius-sm);
+    height: fit-content;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+
+    transition: box-shadow 0.1s ease-in-out, scale 0.1s ease-in-out,
+      text-shadow 0.1s ease-in-out, transform 0.1s ease-in-out,
+      filter 0.5s ease-in-out;
+
+    &:disabled {
+      background-color: var(--color-primary-300);
+      color: var(--color-primary-50);
+      cursor: auto;
+      scale: 1;
+      box-shadow: none;
+      transform: none;
+
+      &:hover {
+        box-shadow: none;
+      }
+    }
+
+    &:active {
+      scale: 0.97;
+    }
+
+    &:hover {
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+
+      /* Gotta stack these up to make a stronger shadow */
+      &.buttonSVGIcon {
+        filter: drop-shadow(0 0 4px rgba(0, 0, 0, 1))
+          drop-shadow(0 0 4px rgba(0, 0, 0, 1))
+          drop-shadow(0 0 4px rgba(0, 0, 0, 1))
+          drop-shadow(0 0 4px rgba(0, 0, 0, 1))
+          drop-shadow(0 0 4px rgba(0, 0, 0, 1))
+          drop-shadow(0 0 4px rgba(0, 0, 0, 1));
+
+        &.dark {
+          filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.75));
+        }
+      }
+    }
+  }
+
+  .ath-button-dark {
+    &.ath-button-outline {
+      outline: 1px solid var(--color-secondary-300);
+      outline-offset: -1px;
+      color: var(--color-text-light);
+    }
+
+    &.ath-button-ghost {
+      box-shadow: none;
+      color: var(--color-text-light);
+
+      &:hover {
+        box-shadow: none;
+        text-shadow: 0 0 6px rgba(255, 255, 255, 0.75);
+      }
+    }
+
+    &:hover {
+      box-shadow: 0 0 4px rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  .ath-button-small {
+    font-size: var(--font-size-sm);
+    line-height: var(--font-size-md);
+    padding: var(--padding-sm) var(--padding-md);
+
+    &.iconOnly {
+      padding: var(--padding-sm);
+    }
+
+    & .buttonSVGIcon {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  .ath-button-medium {
+    font-size: var(--font-size-md);
+    line-height: var(--font-size-lg);
+    padding: var(--padding-md) var(--padding-lg);
+
+    &.iconOnly {
+      padding: var(--padding-md);
+    }
+
+    & .buttonSVGIcon {
+      width: 16px;
+      height: 16px;
+    }
+  }
+  .ath-button-large {
+    font-size: var(--font-size-lg);
+    line-height: var(--font-size-xl);
+    padding: var(--padding-md) var(--padding-lg);
+
+    &.iconOnly {
+      padding: var(--padding-md);
+    }
+
+    & .buttonSVGIcon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .ath-button-full {
+    width: 100%;
+    justify-content: center;
+    padding: var(--padding-md) var(--padding-lg);
+
+    &.iconOnly {
+      padding: var(--padding-md);
+    }
+
+    & .buttonSVGIcon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .ath-button-primary {
+    background-color: var(--color-primary-500);
+    color: var(--color-text-light);
+  }
+
+  .ath-button-secondary {
+    background-color: var(--color-secondary-500);
+    color: var(--color-text-light);
+  }
+
+  .ath-button-tertiary {
+    background-color: var(--color-tertiary-500);
+    color: var(--color-text-dark);
+  }
+  .ath-button-danger {
+    background-color: var(--color-error-500);
+    color: var(--color-text-light);
+  }
+
+  .ath-button-warning {
+    background-color: var(--color-warning);
+    color: var(--color-text-light);
+  }
+
+  .ath-button-success {
+    background-color: var(--color-success);
+    color: var(--color-text-light);
+  }
+
+  .ath-button-outline {
+    outline: 1px solid var(--color-secondary-500);
+    outline-offset: -1px;
+  }
+
+  .ath-button-ghost {
+    box-shadow: none;
+    color: var(--color-text-dark);
+
+    &:hover {
+      box-shadow: none;
+      text-shadow: 0 0 6px rgba(0, 0, 0, 0.75);
+    }
+  }
+}
