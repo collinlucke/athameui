@@ -1,5 +1,12 @@
 "use client";
 import { ButtonPrimitive, type ButtonPrimitiveProps } from "./ButtonPrimitive";
+import { cx } from "../../utils/cx.ts";
+import {
+  buttonVariants,
+  ButtonSize,
+  ButtonVariant,
+  ButtonDark,
+} from "./button.variants.ts";
 import styles from "./Button.module.css";
 
 import type {
@@ -13,17 +20,9 @@ export type ButtonProps = Omit<ButtonPrimitiveProps, "className"> & {
   children?: ReactElement | string;
   className?: string | { button?: string };
   type?: "button" | "submit" | "reset";
-  variant?:
-    | "primary"
-    | "secondary"
-    | "tertiary"
-    | "outline"
-    | "ghost"
-    | "danger"
-    | "warning"
-    | "success";
-  size?: "small" | "medium" | "large" | "full";
-  dark?: boolean;
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  dark?: ButtonDark;
   iconOnly?: boolean;
   icon?: ReactElement | string;
   title?: string;
@@ -64,11 +63,14 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
-    const combinedClasses = `${styles.button} ${styles[size]} ${
-      styles[variant]
-    } ${dark ? styles.dark : ""} ${iconOnly ? styles.iconOnly : ""} ${
-      typeof className === "string" ? className : className?.button || ""
-    }`.trim();
+    const classes = cx(
+      "ath-button",
+      buttonVariants.size[size],
+      buttonVariants.variant[variant],
+      dark ? buttonVariants.dark : "",
+      styles.button,
+      className
+    );
 
     const onClickHandler: MouseEventHandler<HTMLButtonElement> = (e) => {
       onClick?.(e);
@@ -79,7 +81,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         type={type}
         title={title}
-        className={combinedClasses}
+        className={classes}
         disabled={disabled}
         autoFocus={autoFocus}
         tabIndex={disabled ? -1 : tabIndex}
