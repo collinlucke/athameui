@@ -5,15 +5,17 @@
   "type": "module",
   "main": "./dist/athameui.cjs",
   "module": "./dist/athameui.mjs",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/main.d.ts",
   "description": "A sharp React component library that's a cut above the rest. ...sorry, not sorry.",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./main.ts",
+      "types": "./dist/main.d.ts",
+      "import": "./dist/athameui.mjs",
       "require": "./dist/athameui.cjs",
       "default": "./dist/athameui.mjs"
-    }
+    },
+    "./tokens.css": "./dist/tokens.css",
+    "./tailwind-theme.css": "./styles/theme.css"
   },
   "files": [
     "dist",
@@ -51,6 +53,7 @@
     "eslint-plugin-storybook": "^10.1.3",
     "globals": "^16.5.0",
     "playwright": "^1.57.0",
+    "postcss-nested": "^7.0.2",
     "rollup": "^4.53.5",
     "rollup-plugin-postcss": "^4.0.2",
     "storybook": "^10.1.3",

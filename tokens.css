@@ -1,0 +1,248 @@
+@theme {
+  --font-family-sans: "Montserrat", sans-serif;
+  --font-family-serif: "Libre Baskerville", serif;
+
+  --color-primary: #0b1828;
+  --color-secondary: #146b68;
+  --color-tertiary: #bfa081;
+  --color-error: #9f0001;
+  --color-warning: #f39c12;
+  --color-success: #1a9e7a;
+  --color-text-dark: #0b1828;
+  --color-text-light: #fcfbf7;
+
+  --color-background-light: var(--color-text-light);
+  --color-background-dark: var(--color-text-dark);
+
+  /* ----- Primary ----- */
+  --color-primary-50: color-mix(in srgb, var(--color-primary) 10%, white);
+  --color-primary-100: color-mix(in srgb, var(--color-primary) 20%, white);
+  --color-primary-200: color-mix(in srgb, var(--color-primary) 40%, white);
+  --color-primary-300: color-mix(in srgb, var(--color-primary) 60%, white);
+  --color-primary-400: color-mix(in srgb, var(--color-primary) 80%, white);
+  --color-primary-500: color-mix(
+    in srgb,
+    var(--color-primary) 100%,
+    white
+  ); /* original color */
+  --color-primary-600: color-mix(in srgb, var(--color-primary) 80%, black);
+  --color-primary-700: color-mix(in srgb, var(--color-primary) 60%, black);
+  --color-primary-800: color-mix(in srgb, var(--color-primary) 40%, black);
+  --color-primary-900: color-mix(in srgb, var(--color-primary) 20%, black);
+
+  --color-primary-vibrant-300: color-mix(
+    in srgb,
+    var(--color-primary) 30%,
+    cyan
+  );
+  --color-primary-vibrant-500: color-mix(
+    in srgb,
+    var(--color-primary) 40%,
+    dodgerblue
+  );
+  --color-primary-vibrant-700: color-mix(
+    in srgb,
+    var(--color-primary) 60%,
+    deepskyblue
+  );
+
+  /* ----- Secondary ----- */
+  --color-secondary-50: color-mix(in srgb, var(--color-secondary) 10%, white);
+  --color-secondary-100: color-mix(in srgb, var(--color-secondary) 20%, white);
+  --color-secondary-200: color-mix(in srgb, var(--color-secondary) 40%, white);
+  --color-secondary-300: color-mix(in srgb, var(--color-secondary) 60%, white);
+  --color-secondary-400: color-mix(in srgb, var(--color-secondary) 80%, white);
+  --color-secondary-500: color-mix(
+    in srgb,
+    var(--color-secondary) 100%,
+    white
+  ); /* original color */
+  --color-secondary-600: color-mix(in srgb, var(--color-secondary) 80%, black);
+  --color-secondary-700: color-mix(in srgb, var(--color-secondary) 60%, black);
+  --color-secondary-800: color-mix(in srgb, var(--color-secondary) 40%, black);
+  --color-secondary-900: color-mix(in srgb, var(--color-secondary) 20%, black);
+
+  --color-secondary-vibrant-300: color-mix(
+    in srgb,
+    var(--color-secondary) 25%,
+    aqua
+  );
+  --color-secondary-vibrant-500: color-mix(
+    in srgb,
+    var(--color-secondary) 35%,
+    cyan
+  );
+  --color-secondary-vibrant-700: color-mix(
+    in srgb,
+    var(--color-secondary) 55%,
+    turquoise
+  );
+
+  /* ----- Tertiary ----- */
+  --color-tertiary-50: color-mix(in srgb, var(--color-tertiary) 10%, white);
+  --color-tertiary-100: color-mix(in srgb, var(--color-tertiary) 20%, white);
+  --color-tertiary-200: color-mix(in srgb, var(--color-tertiary) 40%, white);
+  --color-tertiary-300: color-mix(in srgb, var(--color-tertiary) 60%, white);
+  --color-tertiary-400: color-mix(in srgb, var(--color-tertiary) 80%, white);
+  --color-tertiary-500: color-mix(
+    in srgb,
+    var(--color-tertiary) 100%,
+    white
+  ); /* original color */
+  --color-tertiary-600: color-mix(in srgb, var(--color-tertiary) 80%, black);
+  --color-tertiary-700: color-mix(in srgb, var(--color-tertiary) 60%, black);
+  --color-tertiary-800: color-mix(in srgb, var(--color-tertiary) 40%, black);
+  --color-tertiary-900: color-mix(in srgb, var(--color-tertiary) 20%, black);
+
+  --color-tertiary-vibrant-300: color-mix(
+    in srgb,
+    var(--color-tertiary) 25%,
+    gold
+  );
+  --color-tertiary-vibrant-500: color-mix(
+    in srgb,
+    var(--color-tertiary) 35%,
+    orange
+  );
+  --color-tertiary-vibrant-700: color-mix(
+    in srgb,
+    var(--color-tertiary) 55%,
+    goldenrod
+  );
+
+  /* ----- Error ----- */
+  --color-error-50: color-mix(in srgb, var(--color-error) 10%, white);
+  --color-error-100: color-mix(in srgb, var(--color-error) 20%, white);
+  --color-error-200: color-mix(in srgb, var(--color-error) 40%, white);
+  --color-error-300: color-mix(in srgb, var(--color-error) 60%, white);
+  --color-error-400: color-mix(in srgb, var(--color-error) 80%, white);
+  --color-error-500: color-mix(
+    in srgb,
+    var(--color-error) 100%,
+    white
+  ); /* original color */
+  --color-error-600: color-mix(in srgb, var(--color-error) 80%, black);
+  --color-error-700: color-mix(in srgb, var(--color-error) 60%, black);
+  --color-error-800: color-mix(in srgb, var(--color-error) 40%, black);
+  --color-error-900: color-mix(in srgb, var(--color-error) 20%, black);
+
+  --color-error-vibrant-300: color-mix(in srgb, var(--color-error) 20%, red);
+  --color-error-vibrant-500: color-mix(
+    in srgb,
+    var(--color-error) 30%,
+    orangered
+  );
+  --color-error-vibrant-700: color-mix(
+    in srgb,
+    var(--color-error) 50%,
+    crimson
+  );
+
+  /* ----- Warning ----- */
+  --color-warning-50: color-mix(in srgb, var(--color-warning) 10%, white);
+  --color-warning-100: color-mix(in srgb, var(--color-warning) 20%, white);
+  --color-warning-200: color-mix(in srgb, var(--color-warning) 40%, white);
+  --color-warning-300: color-mix(in srgb, var(--color-warning) 60%, white);
+  --color-warning-400: color-mix(in srgb, var(--color-warning) 80%, white);
+  --color-warning-500: color-mix(
+    in srgb,
+    var(--color-warning) 100%,
+    white
+  ); /* original color */
+  --color-warning-600: color-mix(in srgb, var(--color-warning) 80%, black);
+  --color-warning-700: color-mix(in srgb, var(--color-warning) 60%, black);
+  --color-warning-800: color-mix(in srgb, var(--color-warning) 40%, black);
+  --color-warning-900: color-mix(in srgb, var(--color-warning) 20%, black);
+
+  --color-warning-vibrant-300: color-mix(
+    in srgb,
+    var(--color-warning) 25%,
+    yellow
+  );
+  --color-warning-vibrant-500: color-mix(
+    in srgb,
+    var(--color-warning) 35%,
+    gold
+  );
+  --color-warning-vibrant-700: color-mix(
+    in srgb,
+    var(--color-warning) 55%,
+    darkorange
+  );
+
+  /* ----- Success ----- */
+  --color-success-50: color-mix(in srgb, var(--color-success) 10%, white);
+  --color-success-100: color-mix(in srgb, var(--color-success) 20%, white);
+  --color-success-200: color-mix(in srgb, var(--color-success) 40%, white);
+  --color-success-300: color-mix(in srgb, var(--color-success) 60%, white);
+  --color-success-400: color-mix(in srgb, var(--color-success) 80%, white);
+  --color-success-500: color-mix(
+    in srgb,
+    var(--color-success) 100%,
+    white
+  ); /* original color */
+  --color-success-600: color-mix(in srgb, var(--color-success) 80%, black);
+  --color-success-700: color-mix(in srgb, var(--color-success) 60%, black);
+  --color-success-800: color-mix(in srgb, var(--color-success) 40%, black);
+  --color-success-900: color-mix(in srgb, var(--color-success) 20%, black);
+
+  --color-success-vibrant-300: color-mix(
+    in srgb,
+    var(--color-success) 25%,
+    lime
+  );
+  --color-success-vibrant-500: color-mix(
+    in srgb,
+    var(--color-success) 30%,
+    springgreen
+  );
+  --color-success-vibrant-700: color-mix(
+    in srgb,
+    var(--color-success) 50%,
+    limegreen
+  );
+
+  /* ----- Padding ----- */
+  --padding-xs: 2px;
+  --padding-sm: 4px;
+  --padding-md: 6px;
+  --padding-lg: 10px;
+  --padding-xl: 16px;
+
+  /* ----- Radius ----- */
+
+  --radius-sm: 3px;
+  --radius-md: 5px;
+  --radius-lg: 8px;
+
+  /* ----- Font Sizes ----- */
+  --font-size-xs: 0.625rem;
+  --font-size-sm: 0.75rem;
+  --font-size-md: 0.875rem;
+  --font-size-lg: 1rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 2rem;
+  --font-size-4xl: 2.5rem;
+  --font-size-5xl: 3rem;
+}
+
+@layer base {
+  button {
+    font-family: inherit;
+    background-color: transparent;
+    border: none;
+  }
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  body {
+    background-color: var(--color-primary-500);
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-md);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+  }
+}

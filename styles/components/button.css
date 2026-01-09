@@ -12,6 +12,10 @@
       text-shadow 0.1s ease-in-out, transform 0.1s ease-in-out,
       filter 0.5s ease-in-out;
 
+    &:active {
+      scale: 0.97;
+    }
+
     &:disabled {
       background-color: var(--color-primary-300);
       color: var(--color-primary-50);
@@ -23,10 +27,6 @@
       &:hover {
         box-shadow: none;
       }
-    }
-
-    &:active {
-      scale: 0.97;
     }
 
     &:hover {
@@ -79,7 +79,7 @@
       padding: var(--padding-sm);
     }
 
-    & .buttonSVGIcon {
+    &.buttonSVGIcon {
       width: 14px;
       height: 14px;
     }
@@ -94,11 +94,12 @@
       padding: var(--padding-md);
     }
 
-    & .buttonSVGIcon {
+    &.buttonSVGIcon {
       width: 16px;
       height: 16px;
     }
   }
+
   .ath-button-large {
     font-size: var(--font-size-lg);
     line-height: var(--font-size-xl);
@@ -108,7 +109,7 @@
       padding: var(--padding-md);
     }
 
-    & .buttonSVGIcon {
+    &.buttonSVGIcon {
       width: 20px;
       height: 20px;
     }
@@ -123,7 +124,7 @@
       padding: var(--padding-md);
     }
 
-    & .buttonSVGIcon {
+    &.buttonSVGIcon {
       width: 20px;
       height: 20px;
     }

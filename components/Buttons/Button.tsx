@@ -1,13 +1,7 @@
 "use client";
 import { ButtonPrimitive, type ButtonPrimitiveProps } from "./ButtonPrimitive";
-import { cx } from "../../utils/cx.ts";
-import {
-  buttonVariants,
-  ButtonSize,
-  ButtonVariant,
-  ButtonDark,
-} from "./button.variants.ts";
-import styles from "./Button.module.css";
+import { cx } from "../../utils/cx";
+import { buttonVariants, ButtonSize, ButtonVariant } from "./button.variants";
 
 import type {
   KeyboardEventHandler,
@@ -18,11 +12,16 @@ import { forwardRef } from "react";
 
 export type ButtonProps = Omit<ButtonPrimitiveProps, "className"> & {
   children?: ReactElement | string;
-  className?: string | { button?: string };
+  className?:
+    | string
+    | { button?: string | false | null | undefined }
+    | false
+    | undefined
+    | null;
   type?: "button" | "submit" | "reset";
   variant?: ButtonVariant;
   size?: ButtonSize;
-  dark?: ButtonDark;
+  dark?: boolean;
   iconOnly?: boolean;
   icon?: ReactElement | string;
   title?: string;
@@ -68,8 +67,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       buttonVariants.size[size],
       buttonVariants.variant[variant],
       dark ? buttonVariants.dark : "",
-      styles.button,
-      className
+      typeof className === "object" && className !== null
+        ? className.button
+        : className
     );
 
     const onClickHandler: MouseEventHandler<HTMLButtonElement> = (e) => {
