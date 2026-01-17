@@ -15,16 +15,32 @@ export default {
     "react/jsx-runtime",
     ...Object.keys(pkg.peerDependencies || {}),
   ],
+  plugins: [
+    resolve(),
+    commonjs(),
+    typescript({
+      tsconfig: "./tsconfig.build.json",
+      compilerOptions: {
+        preserveConstEnums: true,
+      },
+    }),
+    postcss({
+      plugins: [nested()],
+      extract: true,
+    }),
+  ],
   output: [
     {
       file: pkg.module,
       format: "esm",
       sourcemap: true,
+      banner: '"use client";',
     },
     {
       file: pkg.main,
       format: "cjs",
       sourcemap: true,
+      banner: '"use client";',
     },
   ],
 };

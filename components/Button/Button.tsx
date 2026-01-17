@@ -29,6 +29,7 @@ export type ButtonProps = Omit<ButtonPrimitiveProps, "className"> & {
   autoFocus?: boolean;
   tabIndex?: number;
   testId?: string;
+  textAlign?: "left" | "center" | "right";
 
   onClick?: MouseEventHandler<HTMLButtonElement>;
   onKeyDown?: KeyboardEventHandler<HTMLButtonElement>;
@@ -44,7 +45,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       variant = "primary",
       size = "medium",
       dark = false,
-
       disabled = false,
       icon,
       iconOnly,
@@ -53,6 +53,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       type = "button",
       title,
       autoFocus = false,
+      textAlign = "center",
 
       onBlur,
       onClick,
@@ -66,6 +67,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       "ath-button",
       buttonVariants.size[size],
       buttonVariants.variant[variant],
+      buttonVariants.textAlign[textAlign],
       dark ? buttonVariants.dark : "",
       typeof className === "object" && className !== null
         ? className.button

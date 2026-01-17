@@ -1,0 +1,32 @@
+.ath-accordion {
+  display: flex;
+  flex-direction: column;
+  font-size: var(--font-size-md);
+  margin: 0;
+  width: 100%;
+}
+
+.ath-accordion-item {
+  width: 100%;
+  border-bottom: 1px solid var(--color-text-light);
+}
+
+.ath-accordion-item-heading {
+  scale: 1;
+  font-weight: 500;
+  padding: var(--padding-lg);
+}
+
+.ath-accordion-expansion-wrapper {
+  background-color: var(--color-primary-400);
+  overflow: hidden;
+
+  transition: height 0.3s ease, padding 0.3s ease;
+}
+
+.ath-accordion-item-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: var(--padding-lg);
+}

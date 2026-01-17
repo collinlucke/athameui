@@ -16,9 +16,15 @@ export const buttonVariants = {
     outline: "ath-button-outline",
     ghost: "ath-button-ghost",
   },
+  textAlign: {
+    left: "ath-button-text-left",
+    center: "ath-button-text-center",
+    right: "ath-button-text-right",
+  },
   dark: "ath-button-dark",
 } as const;
 
 export type ButtonSize = keyof typeof buttonVariants.size;
 export type ButtonVariant = keyof typeof buttonVariants.variant;
 export type ButtonDark = keyof typeof buttonVariants.dark;
+export type ButtonTextAlign = keyof typeof buttonVariants.textAlign;
