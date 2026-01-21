@@ -27,16 +27,18 @@ jobs:
 
       - name: Extract version from release tag
         id: extract_version
+        if: startsWith(github.ref, 'refs/tags/')
         run: |
           VERSION=${GITHUB_REF#refs/tags/}
           VERSION=${VERSION#v}
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Sync package.json version with tag
-        if: steps.extract_version.outputs.version != ''
+        if: startsWith(github.ref, 'refs/tags/')
         run: |
           PACKAGE_VERSION=$(node -p "require('./package.json').version")
-          TAG_VERSION=${{ steps.extract_version.outputs.version }}
+          TAG_VERSION=${GITHUB_REF#refs/tags/}
+          TAG_VERSION=${TAG_VERSION#v}
 
           if [ "$PACKAGE_VERSION" != "$TAG_VERSION" ]; then
             pnpm version $TAG_VERSION --no-git-tag-version
