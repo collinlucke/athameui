@@ -33,6 +33,7 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Sync package.json version with tag
+        if: steps.extract_version.outputs.version != ''
         run: |
           PACKAGE_VERSION=$(node -p "require('./package.json').version")
           TAG_VERSION=${{ steps.extract_version.outputs.version }}
