@@ -2,13 +2,13 @@
 import { ButtonPrimitive, type ButtonPrimitiveProps } from "./ButtonPrimitive";
 import { cx } from "../../utils/cx";
 import { buttonVariants, ButtonSize, ButtonVariant } from "./button.variants";
-
+import { forwardRef } from "react";
+import { CSSObject } from "@emotion/react";
 import type {
   KeyboardEventHandler,
   MouseEventHandler,
   ReactElement,
 } from "react";
-import { forwardRef } from "react";
 
 export type ButtonProps = Omit<ButtonPrimitiveProps, "className"> & {
   children?: ReactElement | string;
@@ -30,6 +30,7 @@ export type ButtonProps = Omit<ButtonPrimitiveProps, "className"> & {
   tabIndex?: number;
   testId?: string;
   textAlign?: "left" | "center" | "right";
+  sx?: CSSObject | { button: CSSObject; icon?: CSSObject };
 
   onClick?: MouseEventHandler<HTMLButtonElement>;
   onKeyDown?: KeyboardEventHandler<HTMLButtonElement>;
@@ -42,7 +43,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     {
       children,
       className,
-      variant = "primary",
+      variant = "secondary",
       size = "medium",
       dark = false,
       disabled = false,
@@ -54,6 +55,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       title,
       autoFocus = false,
       textAlign = "center",
+      sx,
 
       onBlur,
       onClick,
@@ -61,7 +63,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       onKeyDown,
       ...rest
     },
-    ref
+    ref,
   ) => {
     const classes = cx(
       "ath-button",
@@ -71,7 +73,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       dark ? buttonVariants.dark : "",
       typeof className === "object" && className !== null
         ? className.button
-        : className
+        : className,
     );
 
     const onClickHandler: MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -92,6 +94,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         onKeyDown={onKeyDown}
         onFocus={onFocus}
         onBlur={onBlur}
+        sx={sx}
         {...rest}
       >
         {icon ? (
@@ -108,7 +111,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         )}
       </ButtonPrimitive>
     );
-  }
+  },
 );
 
 Button.displayName = "Button";

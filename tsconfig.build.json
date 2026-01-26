@@ -6,7 +6,7 @@
     "rootDir": "./",
     "noEmit": false
   },
-  "include": ["main.ts", "components", "styles"],
+  "include": ["main.ts", "components", "styles", "emotion.d.ts"],
   "exclude": [
     "node_modules",
     "dist",

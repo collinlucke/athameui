@@ -5,6 +5,7 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react",
     "declaration": true,
     "declarationMap": true,
     "esModuleInterop": true,
@@ -13,6 +14,6 @@
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": ["components", "main.ts", "css-modules.d.ts"],
+  "include": ["components", "main.ts", "css-modules.d.ts", "emotion.d.ts"],
   "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.test.tsx"]
 }

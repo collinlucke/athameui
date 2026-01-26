@@ -1,12 +1,16 @@
-import { ReactNode } from "react";
+import type { ReactElement } from "react";
+import { cx } from "../../utils/cx";
 
 type ListProps = {
-  children?: ReactNode[];
-  addClasses?: {
-    list?: string;
-    ul?: string;
-    ol?: string;
-  };
+  children?: ReactElement[] | string[];
+  className?:
+    | string
+    | {
+        list?: string | false | null | undefined;
+      }
+    | false
+    | undefined
+    | null;
   ariaLabel?: string;
   ariaLabelledBy?: string;
   ariaDescribedBy?: string;
@@ -15,8 +19,8 @@ type ListProps = {
   ordered?: boolean;
 };
 
-export const List: React.FC<ListProps> = ({
-  addClasses,
+export const List = ({
+  className,
   children,
   ariaLabel,
   ariaLabelledBy,
@@ -24,14 +28,19 @@ export const List: React.FC<ListProps> = ({
   role = "list",
   dataTestId,
   ordered = false,
-}) => {
+}: ListProps) => {
   const ListType = ordered ? "ol" : "ul";
+
+  const classes = cx(
+    "ath-list",
+    typeof className === "object" && className !== null
+      ? className.list
+      : className,
+  );
 
   return (
     <ListType
-      className={`bn-list font-medium m-0 w-full flex flex-col list-none ps-0 ${
-        addClasses?.list || ""
-      } ${ordered ? addClasses?.ol || "" : addClasses?.ul || ""}`}
+      className={classes}
       role={role}
       aria-label={ariaLabel}
       aria-labelledby={ariaLabelledBy}

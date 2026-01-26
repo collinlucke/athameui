@@ -1,0 +1,20 @@
+@import "../tokens.css";
+
+@layer components {
+  .ath-list {
+    list-style-type: none;
+    width: 100%;
+    margin: 0;
+    font-weight: 500;
+    padding-inline-start: 0;
+  }
+
+  .ath-list-item {
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-secondary-50);
+
+    &:hover {
+      background-color: var(--color-secondary-50);
+    }
+  }
+}

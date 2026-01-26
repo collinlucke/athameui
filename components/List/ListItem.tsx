@@ -1,8 +1,12 @@
+import { cx } from "../../utils";
+
 type ListItemProps = {
   children?: React.ReactNode;
-  addClasses?: {
-    li?: string;
-  };
+  className?:
+    | string
+    | {
+        li?: string | false | null | undefined;
+      };
   useHover?: boolean;
   role?: "listitem" | "menuitem" | "tab" | "treeitem" | "option";
   ariaLabel?: string;
@@ -18,7 +22,7 @@ type ListItemProps = {
 
 export const ListItem: React.FC<ListItemProps> = ({
   children,
-  addClasses,
+  className,
   role = "listitem",
   ariaLabel,
   ariaDescribedBy,
@@ -30,11 +34,16 @@ export const ListItem: React.FC<ListItemProps> = ({
   onClick,
   onKeyDown,
 }) => {
+  const classes = cx(
+    "ath-list-item",
+    typeof className === "object" && className !== null
+      ? className.li
+      : className,
+  );
+
   return (
     <li
-      className={`bn-list-item rounded-md border border-solid border-color-secondary-50 hover:bg-secondary-50 ${
-        addClasses?.li || ""
-      }`}
+      className={classes}
       role={role}
       aria-label={ariaLabel}
       aria-describedby={ariaDescribedBy}
