@@ -1,13 +1,27 @@
+import { CSSObject } from "@emotion/react";
+import { cx } from "../../utils";
+
 type ButtonGroupProps = {
   children: React.ReactNode;
-  gap?: string;
+  sx?: {
+    buttonGroup?: CSSObject;
+  };
   direction?: "row" | "column";
 };
 
 export const ButtonGroup = ({
   children,
-  gap = "2",
+  sx,
   direction = "row",
 }: ButtonGroupProps) => {
-  return <div className={`flex flex-${direction} gap-${gap}`}>{children}</div>;
+  const classes = cx(
+    "ath-button-group",
+    `ath-button-group-direction-${direction}`,
+  );
+
+  return (
+    <div className={classes} css={sx?.buttonGroup}>
+      {children}
+    </div>
+  );
 };

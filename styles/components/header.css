@@ -3,5 +3,10 @@
 @layer components {
   .ath-header {
     background-color: var(--color-secondary-500);
+    display: flex;
+    height: 55px;
+    @media (min-width: 896px) {
+      height: 75px;
+    }
   }
 }

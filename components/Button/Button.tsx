@@ -1,5 +1,4 @@
 "use client";
-import { ButtonPrimitive, type ButtonPrimitiveProps } from "./ButtonPrimitive";
 import { cx } from "../../utils/cx";
 import { buttonVariants, ButtonSize, ButtonVariant } from "./button.variants";
 import { forwardRef } from "react";
@@ -10,32 +9,32 @@ import type {
   ReactElement,
 } from "react";
 
-export type ButtonProps = Omit<ButtonPrimitiveProps, "className"> & {
+export type ButtonProps = {
   children?: ReactElement | string;
   className?:
     | string
-    | { button?: string | false | null | undefined }
+    | {
+        button?: string | false | null | undefined;
+        icon?: string | false | null | undefined;
+      }
     | false
     | undefined
     | null;
+  dark?: boolean;
+  disabled?: boolean;
+  icon?: React.ComponentType<{ className?: string }> | string;
+  size?: ButtonSize;
+  sx?: CSSObject | { button?: CSSObject; icon?: CSSObject };
+  title?: string;
+  tabIndex?: number;
+  textPosition?: "left" | "center" | "right";
   type?: "button" | "submit" | "reset";
   variant?: ButtonVariant;
-  size?: ButtonSize;
-  dark?: boolean;
-  iconOnly?: boolean;
-  icon?: ReactElement | string;
-  title?: string;
-  disabled?: boolean;
-  autoFocus?: boolean;
-  tabIndex?: number;
-  testId?: string;
-  textAlign?: "left" | "center" | "right";
-  sx?: CSSObject | { button: CSSObject; icon?: CSSObject };
 
-  onClick?: MouseEventHandler<HTMLButtonElement>;
-  onKeyDown?: KeyboardEventHandler<HTMLButtonElement>;
-  onFocus?: (event: React.FocusEvent<HTMLButtonElement>) => void;
   onBlur?: (event: React.FocusEvent<HTMLButtonElement>) => void;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
+  onFocus?: (event: React.FocusEvent<HTMLButtonElement>) => void;
+  onKeyDown?: KeyboardEventHandler<HTMLButtonElement>;
 };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -43,19 +42,15 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     {
       children,
       className,
-      variant = "secondary",
-      size = "medium",
       dark = false,
       disabled = false,
-      icon,
-      iconOnly,
-      tabIndex,
-      testId,
-      type = "button",
-      title,
-      autoFocus = false,
-      textAlign = "center",
+      icon: Icon,
+      size = "medium",
       sx,
+      tabIndex,
+      type = "button",
+      textPosition = "center",
+      variant = "secondary",
 
       onBlur,
       onClick,
@@ -65,51 +60,75 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref,
   ) => {
-    const classes = cx(
+    const isIconOnly = Icon && !children;
+
+    const sharedClasses = cx(
       "ath-button",
       buttonVariants.size[size],
       buttonVariants.variant[variant],
-      buttonVariants.textAlign[textAlign],
+      isIconOnly ? "ath-button-icon-only" : "",
       dark ? buttonVariants.dark : "",
+    );
+
+    const buttonClasses = cx(
+      sharedClasses,
+      buttonVariants.textPosition[textPosition],
       typeof className === "object" && className !== null
         ? className.button
         : className,
+    );
+
+    const iconClasses = cx(
+      sharedClasses,
+      "ath-button-icon",
+      typeof className === "object" && className !== null
+        ? className.icon
+        : undefined,
     );
 
     const onClickHandler: MouseEventHandler<HTMLButtonElement> = (e) => {
       onClick?.(e);
     };
 
+    const onKeyDownHandler: KeyboardEventHandler<HTMLButtonElement> = (e) => {
+      onKeyDown?.(e);
+    };
+
+    const onFocusHandler = (e: React.FocusEvent<HTMLButtonElement>) => {
+      onFocus?.(e);
+    };
+
+    const onBlurHandler = (e: React.FocusEvent<HTMLButtonElement>) => {
+      onBlur?.(e);
+    };
+
     return (
-      <ButtonPrimitive
+      <button
         ref={ref}
-        type={type}
-        title={title}
-        className={classes}
+        className={buttonClasses}
+        css={sx?.button ? sx.button : sx}
         disabled={disabled}
-        autoFocus={autoFocus}
         tabIndex={disabled ? -1 : tabIndex}
-        data-testid={testId}
+        type={type}
         onClick={onClickHandler}
-        onKeyDown={onKeyDown}
-        onFocus={onFocus}
-        onBlur={onBlur}
-        sx={sx}
+        onKeyDown={onKeyDownHandler}
+        onFocus={onFocusHandler}
+        onBlur={onBlurHandler}
         {...rest}
       >
-        {icon ? (
+        {Icon ? (
           <>
-            {typeof icon === "string" ? (
-              <span aria-hidden="true">{icon}</span>
-            ) : (
-              icon
-            )}
-            {!iconOnly && children}
+            <Icon
+              className={iconClasses}
+              css={sx?.icon ? sx.icon : undefined}
+            />
+
+            {!isIconOnly && children}
           </>
         ) : (
           <>{children}</>
         )}
-      </ButtonPrimitive>
+      </button>
     );
   },
 );

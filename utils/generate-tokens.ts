@@ -75,33 +75,98 @@ function formatTokensForTS(obj: TokenValue, indent = 2): string {
 function organizeTokens(flatTokens: Record<string, string>): TokenValue {
   // First pass: resolve CSS variable references
   const resolvedTokens = resolveCSSVariables(flatTokens);
-
-  const organized: TokenValue = {
-    color: {},
-    font: { family: {}, size: {} },
-    padding: {},
-    radius: {},
-    screen: {},
-  };
+  const organized: TokenValue = {};
 
   for (const [key, value] of Object.entries(resolvedTokens)) {
-    if (key.startsWith("color")) {
-      organizeColorTokens(key, value, organized.color as TokenValue);
-    } else if (key.startsWith("font")) {
-      organizeFontTokens(key, value, organized.font as TokenValue);
-    } else if (key.startsWith("padding")) {
-      const sizeKey = key.replace("padding", "").toLowerCase();
-      (organized.padding as TokenValue)[sizeKey || "default"] = value;
-    } else if (key.startsWith("radius")) {
-      const sizeKey = key.replace("radius", "").toLowerCase();
-      (organized.radius as TokenValue)[sizeKey || "default"] = value;
-    } else if (key.startsWith("screen")) {
-      const sizeKey = key.replace("screen", "").toLowerCase();
-      (organized.screen as TokenValue)[sizeKey || "default"] = value;
-    }
+    organizeTokenDynamically(key, value, organized);
   }
 
   return organized;
+}
+
+function organizeTokenDynamically(
+  key: string,
+  value: string,
+  organized: TokenValue,
+): void {
+  // Handle numbered variants at the end of keys like fontSize2xl, screen3xl, colorPrimaryVibrant300
+  const numberedMatch = key.match(/^(.+?)(\d+[a-z]*)$/);
+  if (numberedMatch) {
+    const [, basePart, numberPart] = numberedMatch;
+
+    // Split the base part into category parts
+    const parts = basePart.split(/(?=[A-Z])/).map((part) => part.toLowerCase());
+
+    let current = organized;
+
+    // Navigate to the correct nested location
+    for (const part of parts) {
+      if (!current[part]) {
+        current[part] = {};
+      } else if (typeof current[part] === "string") {
+        const existingValue = current[part];
+        current[part] = { default: existingValue };
+      }
+      current = current[part] as TokenValue;
+    }
+
+    // Add the numbered variant
+    current[numberPart] = value;
+    return;
+  }
+
+  // Split camelCase key into parts for regular tokens
+  const parts = key.split(/(?=[A-Z])/).map((part) => part.toLowerCase());
+
+  if (parts.length === 0) return;
+
+  let current = organized;
+
+  // Navigate through all parts except the last one
+  for (let i = 0; i < parts.length - 1; i++) {
+    const part = parts[i];
+
+    if (!current[part]) {
+      current[part] = {};
+    } else if (typeof current[part] === "string") {
+      // Convert existing string value to object with 'default' key
+      const existingValue = current[part];
+      current[part] = { default: existingValue };
+    }
+
+    current = current[part] as TokenValue;
+  }
+
+  // Handle the final key
+  const finalPart = parts[parts.length - 1];
+
+  // Check if this looks like a numbered variant (ends with digits)
+  const numberMatch = finalPart.match(/^(.+?)(\d+)$/);
+
+  if (numberMatch) {
+    // Handle numbered variants like primary50
+    const [, baseName, number] = numberMatch;
+
+    // Ensure the base exists as an object
+    if (!current[baseName]) {
+      current[baseName] = {};
+    } else if (typeof current[baseName] === "string") {
+      // Convert existing string to object with default key
+      const existingValue = current[baseName];
+      current[baseName] = { default: existingValue };
+    }
+
+    const baseGroup = current[baseName] as TokenValue;
+    baseGroup[number] = value;
+  } else {
+    // Regular token or base token
+    if (current[finalPart] && typeof current[finalPart] === "object") {
+      // If it's already an object, add as 'default'
+      (current[finalPart] as TokenValue)["default"] = value;
+    } else {
+      current[finalPart] = value;
+    }
+  }
 }
 
 function resolveCSSVariables(
@@ -131,75 +196,10 @@ function resolveCSSVariables(
   return resolved;
 }
 
-function organizeColorTokens(
-  key: string,
-  value: string,
-  colorObj: TokenValue,
-): void {
-  // Remove 'color' prefix to get the rest
-  const remaining = key.substring(5); // Remove 'color'
-
-  if (remaining.startsWith("Background")) {
-    if (!colorObj.background) colorObj.background = {};
-    const bgKey = remaining.replace("Background", "").toLowerCase();
-    (colorObj.background as TokenValue)[bgKey || "default"] = value;
-  } else if (remaining.startsWith("Text")) {
-    if (!colorObj.text) colorObj.text = {};
-    const textKey = remaining.replace("Text", "").toLowerCase();
-    (colorObj.text as TokenValue)[textKey || "default"] = value;
-  } else {
-    // Match patterns like: Primary50, PrimaryVibrant300, Secondary, etc.
-    const vibrantMatch = remaining.match(/^([A-Z][a-z]+?)Vibrant(\d+)$/);
-    const numberMatch = remaining.match(/^([A-Z][a-z]+?)(\d+)$/);
-    const baseMatch = remaining.match(/^([A-Z][a-z]+)$/);
-
-    if (vibrantMatch) {
-      const [, colorName, number] = vibrantMatch;
-      const colorNameKey = colorName.toLowerCase();
-
-      if (!colorObj[colorNameKey]) colorObj[colorNameKey] = {};
-      const colorGroup = colorObj[colorNameKey] as TokenValue;
-      if (!colorGroup.vibrant) colorGroup.vibrant = {};
-      (colorGroup.vibrant as TokenValue)[number] = value;
-    } else if (numberMatch) {
-      const [, colorName, number] = numberMatch;
-      const colorNameKey = colorName.toLowerCase();
-
-      if (!colorObj[colorNameKey]) colorObj[colorNameKey] = {};
-      const colorGroup = colorObj[colorNameKey] as TokenValue;
-      colorGroup[number] = value;
-    } else if (baseMatch) {
-      const colorNameKey = baseMatch[1].toLowerCase();
-
-      if (!colorObj[colorNameKey]) colorObj[colorNameKey] = {};
-      const colorGroup = colorObj[colorNameKey] as TokenValue;
-      colorGroup["default"] = value;
-    } else {
-      // Fallback for any unmatched patterns
-      console.warn(`Unmatched color token: ${key}`);
-      colorObj[remaining.toLowerCase()] = value;
-    }
-  }
-}
-
-function organizeFontTokens(
-  key: string,
-  value: string,
-  fontObj: TokenValue,
-): void {
-  if (key.startsWith("fontFamily")) {
-    const familyKey = key.replace("fontFamily", "").toLowerCase();
-    (fontObj.family as TokenValue)[familyKey || "default"] = value;
-  } else if (key.startsWith("fontSize")) {
-    const sizeKey = key.replace("fontSize", "").toLowerCase();
-    (fontObj.size as TokenValue)[sizeKey || "default"] = value;
-  }
-}
-
 function generateTokensFromCSS(): void {
   try {
     // Read the tokens.css file
-    const cssPath = join(__dirname, "./tokens.css");
+    const cssPath = join(__dirname, "../styles/tokens.css");
     const cssContent = readFileSync(cssPath, "utf-8");
 
     // Extract CSS custom properties from :root
@@ -224,20 +224,26 @@ function generateTokensFromCSS(): void {
 
     // Generate TypeScript content with proper formatting
     const formattedTokens = formatTokensForTS(organizedTokens);
+
+    // Generate dynamic type exports based on the organized tokens
+    const typeExports = Object.keys(organizedTokens)
+      .map((category) => {
+        const capitalizedCategory =
+          category.charAt(0).toUpperCase() + category.slice(1);
+        return `export type ${capitalizedCategory}Tokens = typeof tokens.${category};`;
+      })
+      .join("\n");
+
     const tsContent = `export const tokens = ${formattedTokens};
 
 export type Tokens = typeof tokens;
 
 // Individual token type exports for convenience
-export type ColorTokens = typeof tokens.color;
-export type FontTokens = typeof tokens.font;
-export type PaddingTokens = typeof tokens.padding;
-export type RadiusTokens = typeof tokens.radius;
-export type ScreenTokens = typeof tokens.screen;
+${typeExports}
 `;
 
     // Write to tokens.ts file
-    const tsPath = join(__dirname, "./tokens.ts");
+    const tsPath = join(__dirname, "../styles/tokens.ts");
     writeFileSync(tsPath, tsContent, "utf-8");
 
     console.log("✅ Successfully generated tokens.ts from tokens.css");

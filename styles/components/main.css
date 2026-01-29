@@ -2,7 +2,7 @@
 
 @layer components {
   .ath-main {
-    width: 100%;
+    overflow-x: hidden;
     position: relative;
     padding: 32px;
     display: flex;

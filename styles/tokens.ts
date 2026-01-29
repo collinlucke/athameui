@@ -1,4 +1,21 @@
 export const tokens = {
+  font: {
+    family: {
+      sans: "Montserrat, sans-serif",
+      serif: "Libre Baskerville, serif"
+    },
+    size: {
+      xs: "0.625rem",
+      sm: "0.75rem",
+      md: "0.875rem",
+      lg: "1rem",
+      xl: "1.25rem",
+      "2xl": "1.5rem",
+      "3xl": "2rem",
+      "4xl": "2.5rem",
+      "5xl": "3rem"
+    }
+  },
   color: {
     primary: {
       "50": "#f0f2f5",
@@ -117,23 +134,6 @@ export const tokens = {
       dark: "#040a0c"
     }
   },
-  font: {
-    family: {
-      sans: "Montserrat, sans-serif",
-      serif: "Libre Baskerville, serif"
-    },
-    size: {
-      xs: "0.625rem",
-      sm: "0.75rem",
-      md: "0.875rem",
-      lg: "1rem",
-      xl: "1.25rem",
-      "2xl": "1.5rem",
-      "3xl": "2rem",
-      "4xl": "2.5rem",
-      "5xl": "3rem"
-    }
-  },
   padding: {
     xs: "2px",
     sm: "4px",
@@ -149,19 +149,31 @@ export const tokens = {
   screen: {
     xs: "360px",
     sm: "480px",
-    md: "640px",
-    lg: "768px",
+    md: "768px",
+    lg: "896px",
     xl: "1024px",
     "2xl": "1280px",
     "3xl": "1536px"
+  },
+  media: {
+    min: {
+      xs: "@media (min-width: 360px)",
+      sm: "@media (min-width: 480px)",
+      md: "@media (min-width: 768px)",
+      lg: "@media (min-width: 896px)",
+      xl: "@media (min-width: 1024px)",
+      "2xl": "@media (min-width: 1280px)",
+      "3xl": "@media (min-width: 1536px)"
+    }
   }
 };
 
 export type Tokens = typeof tokens;
 
 // Individual token type exports for convenience
-export type ColorTokens = typeof tokens.color;
 export type FontTokens = typeof tokens.font;
+export type ColorTokens = typeof tokens.color;
 export type PaddingTokens = typeof tokens.padding;
 export type RadiusTokens = typeof tokens.radius;
 export type ScreenTokens = typeof tokens.screen;
+export type MediaTokens = typeof tokens.media;

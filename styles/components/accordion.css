@@ -7,6 +7,8 @@
     font-size: var(--font-size-md);
     margin: 0;
     width: 100%;
+    border-radius: 3px;
+    overflow: hidden;
   }
 
   .ath-accordion-item {
@@ -24,14 +26,12 @@
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    /* font-size: 18px;
-    font-weight: 600; */
     color: var(--color-tertiary-50);
     text-align: left;
     transition:
       background-color 0.2s ease,
       color 0.2s ease;
-    border-radius: none;
+    border-radius: 0;
 
     &:active {
       scale: 1;
@@ -44,8 +44,6 @@
 
     &:focus {
       color: var(--color-primary-600);
-      /* outline: 2px solid var(--color-primary-400); */
-      /* outline-offset: -2px; */
       background-color: var(--color-primary-50);
     }
   }
