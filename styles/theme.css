@@ -1,6 +1,9 @@
+@import "./components/main.css";
 @import "./components/button.css";
 @import "./components/header.css";
+@import "./components/footer.css";
 @import "./components/accordion.css";
 @import "./components/list.css";
-@import "./components/main.css";
+@import "./components/search.css";
+@import "./components/form-elements.css";
 @import "./tokens.css";

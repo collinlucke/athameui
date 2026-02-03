@@ -154,6 +154,14 @@
   --media-min-xl: @media (min-width: 1024px);
   --media-min-2xl: @media (min-width: 1280px);
   --media-min-3xl: @media (min-width: 1536px);
+
+  --media-max-xs: @media (max-width: 359px);
+  --media-max-sm: @media (max-width: 479px);
+  --media-max-md: @media (max-width: 767px);
+  --media-max-lg: @media (max-width: 895px);
+  --media-max-xl: @media (max-width: 1023px);
+  --media-max-2xl: @media (max-width: 1279px);
+  --media-max-3xl: @media (max-width: 1535px);
 }
 
 @layer base {
@@ -170,7 +178,7 @@
     color: var(--color-text-light);
     font-size: var(--font-size-3xl);
     font-weight: 300;
-    margin: 0;
+    margin: 0 0 1rem;
     line-height: normal;
   }
   h2 {
@@ -181,13 +189,12 @@
   }
   h3 {
     color: var(--color-primary-200);
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-xl);
     font-weight: 500;
     margin: 0;
   }
   p {
     margin: 0;
-    margin-top: 1rem;
     margin-bottom: 1rem;
     line-height: 1.5;
   }
@@ -195,6 +202,10 @@
     font-family: inherit;
     background-color: transparent;
     border: none;
+
+    &:focus {
+      outline: none;
+    }
   }
   a {
     text-decoration: none;

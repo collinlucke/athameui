@@ -3,24 +3,29 @@ import { cx } from "../../utils";
 
 type ButtonGroupProps = {
   children: React.ReactNode;
-  sx?: {
-    buttonGroup?: CSSObject;
+  className?: {
+    buttonGroup?: string | false | null | undefined;
   };
   direction?: "row" | "column";
+  sx?: {
+    buttonGroup?: CSSObject | string;
+  };
 };
 
 export const ButtonGroup = ({
   children,
-  sx,
+  className,
   direction = "row",
+  sx,
 }: ButtonGroupProps) => {
-  const classes = cx(
+  const buttonGroupClasses = cx(
     "ath-button-group",
     `ath-button-group-direction-${direction}`,
+    className?.buttonGroup ? className.buttonGroup : undefined,
   );
 
   return (
-    <div className={classes} css={sx?.buttonGroup}>
+    <div className={buttonGroupClasses} css={sx?.buttonGroup}>
       {children}
     </div>
   );

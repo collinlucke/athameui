@@ -3,5 +3,8 @@ export * from "./Header";
 export * from "./Accordion";
 export * from "./List";
 export * from "./Layout";
+export * from "./Search";
+export * from "./FormElements";
+export * from "./ContainerScalingText";
 // export * from "./AthameRouter";
 // export * from "./Link";

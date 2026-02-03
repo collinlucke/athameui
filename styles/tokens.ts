@@ -164,13 +164,22 @@ export const tokens = {
       xl: "@media (min-width: 1024px)",
       "2xl": "@media (min-width: 1280px)",
       "3xl": "@media (min-width: 1536px)"
+    },
+    max: {
+      xs: "@media (max-width: 359px)",
+      sm: "@media (max-width: 479px)",
+      md: "@media (max-width: 767px)",
+      lg: "@media (max-width: 895px)",
+      xl: "@media (max-width: 1023px)",
+      "2xl": "@media (max-width: 1279px)",
+      "3xl": "@media (max-width: 1535px)"
     }
   }
 };
 
 export type Tokens = typeof tokens;
 
-// Individual token type exports for convenience
+
 export type FontTokens = typeof tokens.font;
 export type ColorTokens = typeof tokens.color;
 export type PaddingTokens = typeof tokens.padding;

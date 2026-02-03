@@ -6,7 +6,9 @@
     position: relative;
     padding: 32px;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     gap: 20px;
+    flex-grow: 1;
   }
 }

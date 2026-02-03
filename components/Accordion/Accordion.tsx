@@ -13,21 +13,25 @@ type AccordionProps = {
   expand?: "one" | "any";
   sx?: {
     accordion: CSSObject;
-    accordionItem?: CSSObject;
-    accordionHeading?: CSSObject;
-    accordionTitle?: CSSObject;
-    accordionExpansionWrapper?: CSSObject;
-    accordionContentWrapper?: CSSObject;
+    accordionItem?: {
+      accordionItem?: CSSObject;
+      accordionHeading?: CSSObject;
+      accordionTitle?: CSSObject;
+      accordionExpansionWrapper?: CSSObject;
+      accordionContentWrapper?: CSSObject;
+    };
   };
-  className?:
-    | string
-    | {
-        accordion?: string | false | null | undefined;
-        accordionItem?: string | false | null | undefined;
-      }
-    | false
-    | undefined
-    | null;
+  className?: {
+    accordion?: string | false | null | undefined;
+    accordionItem?: {
+      accordionItem?: string | false | null | undefined;
+      accordionHeading?: string | false | null | undefined;
+      accordionTitle?: string | false | null | undefined;
+      accordionExpansionWrapper?: string | false | null | undefined;
+      accordionContentWrapper?: string | false | null | undefined;
+    };
+  };
+
   CustomAccordionItem?: React.ComponentType<
     AccordionItemType & {
       expanded: boolean;
@@ -35,6 +39,7 @@ type AccordionProps = {
       className?: AccordionProps["className"];
     }
   >;
+
   expandToggleCallback?: (expandedItems: (string | number)[]) => void;
 };
 
@@ -45,16 +50,15 @@ export const Accordion = ({
   childrenFirst,
   expand = "one",
   sx,
+
   CustomAccordionItem,
 
   expandToggleCallback,
 }: AccordionProps) => {
   const [expandedItems, setExpandedItems] = useState<(string | number)[]>([]);
-  const classes = cx(
+  const accordionClasses = cx(
     "ath-accordion",
-    typeof className === "object" && className !== null
-      ? className.accordion
-      : className,
+    className?.accordion ? className.accordion : undefined,
   );
 
   const expandToggle = (itemId: string | number) => {
@@ -73,33 +77,31 @@ export const Accordion = ({
   };
 
   return (
-    <div className={classes} css={sx?.accordion}>
+    <div className={accordionClasses} css={sx?.accordion}>
       {childrenFirst && children}
       <List>
         {items.map((item) => (
-          <>
+          <div key={item.id}>
             {CustomAccordionItem ? (
               <CustomAccordionItem
-                key={item.id}
-                {...item}
                 expanded={expandedItems.includes(item.id)}
                 onToggle={expandToggle}
+                {...item}
               />
             ) : (
               <AccordionItem
                 sx={sx}
-                key={item.id}
                 item={item}
                 expanded={expandedItems.includes(item.id)}
                 onToggle={expandToggle}
                 className={
-                  typeof className === "object" && className !== null
-                    ? className.accordionItem
+                  className?.accordionItem
+                    ? { ...className.accordionItem }
                     : undefined
                 }
               />
             )}
-          </>
+          </div>
         ))}
       </List>
       {!childrenFirst && children}

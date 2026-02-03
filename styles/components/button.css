@@ -144,6 +144,7 @@
     background-color: var(--color-tertiary-500);
     color: var(--color-text-dark);
   }
+
   .ath-button-danger {
     background-color: var(--color-error-500);
     color: var(--color-text-light);
@@ -213,5 +214,19 @@
 
   .ath-button-group-direction-column {
     flex-direction: column;
+  }
+
+  /* ----- ScrollToTopButton Styles ----- */
+  .ath-scroll-to-top-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    border-radius: 50%;
+    padding: 0;
+
+    &.hidden {
+      display: none;
+    }
   }
 }

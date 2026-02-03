@@ -6,12 +6,18 @@ import { CircleArrowUp02Icon } from "@hugeicons/core-free-icons";
 import type { ButtonProps } from "./Button";
 import { cx } from "../../utils/cx";
 
-type BackToTopButtonProps = ButtonProps & {
-  className?: string;
+type ScrollToTopButtonProps = ButtonProps & {
+  className?: {
+    button?: string | false | null | undefined;
+  };
 };
 
-export const BackToTopButton = (props: BackToTopButtonProps) => {
-  const { className, variant, dark = false, testId, title } = props;
+export const ScrollToTopButton = ({
+  className,
+  variant,
+  dark = false,
+  title,
+}: ScrollToTopButtonProps) => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -36,12 +42,12 @@ export const BackToTopButton = (props: BackToTopButtonProps) => {
 
   if (!visible) return null;
 
-  const classes = cx("ath-back-to-top-button", className);
+  const buttonClasses = cx("ath-scroll-to-top-button", className?.button);
 
   return (
     <Button
-      className={classes}
-      data-testid={`${testId} "ath-back-to-top-button"`}
+      className={{ button: buttonClasses }}
+      data-testid="ath-scroll-to-top-button"
       onClick={scrollToTop}
       variant={variant ?? "secondary"}
       title={title ?? "Back to Top"}

@@ -1,0 +1,49 @@
+@import "../tokens.css";
+
+/* ----- Search Component Styles ----- */
+@layer component {
+  .ath-search-form {
+    display: flex;
+    width: 100%;
+  }
+
+  .ath-search-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    width: 100%;
+    flex-direction: column;
+  }
+
+  @media (min-width: 768px) {
+    .ath-search-wrapper {
+      align-items: end;
+      flex-direction: row;
+    }
+  }
+
+  .ath-search-results-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .ath-search-results {
+    align-self: end;
+  }
+
+  .ath-search-input-wrapper {
+    position: relative;
+    flex: 1;
+  }
+
+  .ath-search-field-container {
+    margin: 0;
+    flex: initial;
+    justify-content: end;
+  }
+
+  .ath-search-button {
+    white-space: nowrap;
+  }
+}

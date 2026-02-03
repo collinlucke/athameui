@@ -1,25 +1,24 @@
 "use client";
-import { cx } from "../../utils/cx";
-import { buttonVariants, ButtonSize, ButtonVariant } from "./button.variants";
 import { forwardRef } from "react";
-import { CSSObject } from "@emotion/react";
 import type {
   KeyboardEventHandler,
   MouseEventHandler,
   ReactElement,
 } from "react";
+import { cx } from "../../utils/cx";
+import {
+  buttonVariants,
+  type ButtonSize,
+  type ButtonVariant,
+} from "./button.variants";
+import { CSSObject } from "@emotion/react";
 
 export type ButtonProps = {
   children?: ReactElement | string;
-  className?:
-    | string
-    | {
-        button?: string | false | null | undefined;
-        icon?: string | false | null | undefined;
-      }
-    | false
-    | undefined
-    | null;
+  className?: {
+    button?: string | false | null | undefined;
+    icon?: string | false | null | undefined;
+  };
   dark?: boolean;
   disabled?: boolean;
   icon?: React.ComponentType<{ className?: string }> | string;
