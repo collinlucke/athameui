@@ -1,3 +1,4 @@
+"use client";
 import { cx } from "../../utils";
 import { ButtonGroupVariants } from "./buttonGroup.variants";
 import type { ButtonGroupProps } from "./ButtonGroupProps";

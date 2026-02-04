@@ -1,3 +1,4 @@
+"use client";
 import React, { ReactNode, useRef, useLayoutEffect } from "react";
 import { CSSObject } from "@emotion/react";
 import { cx } from "../../utils/cx";
@@ -157,6 +158,7 @@ export const FormInput: React.FC<FormInputProps> = ({
       className={labelClasses}
       sx={{ label: sx?.label, required: sx?.required }}
       labelPosition={labelPosition}
+      dark={dark}
     />
   ) : null;
 

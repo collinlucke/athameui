@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { FormInput } from "../FormElements";
 import { Button } from "../Button";
@@ -24,7 +25,7 @@ type SearchProps = {
   resultsLabel?: React.ReactNode;
   searchLabel?: string;
   searchRole?: string;
-  searchTerm?: string;
+  searchTerm?: string | number;
   showResultsCount?: boolean;
   showSearchButton?: boolean;
   sx?: {
@@ -37,7 +38,7 @@ type SearchProps = {
   testId?: string;
   totalResultsCount?: string;
 
-  onSearch?: (searchTerm: string) => void;
+  onSearch?: (searchTerm: string | number | undefined) => void;
   setSearchTerm: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -75,7 +76,7 @@ export const Search = ({
   };
 
   const onSearchHandler = () => {
-    onSearch?.(searchTerm || "");
+    onSearch?.(searchTerm);
   };
 
   const hitEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {

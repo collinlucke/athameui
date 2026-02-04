@@ -1,3 +1,4 @@
+"use client";
 import { cx } from "../../utils";
 
 type FooterProps = {

@@ -1,3 +1,4 @@
+"use client";
 import type { CSSObject } from "@emotion/react";
 import { cx } from "../../utils";
 
