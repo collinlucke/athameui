@@ -1,6 +1,7 @@
 export * from "./Accordion";
 export * from "./Avatar";
 export * from "./Button";
+export * from "./ButtonGroup";
 export * from "./ContainerScalingText";
 export * from "./FormElements";
 export * from "./Header";
