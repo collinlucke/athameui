@@ -1,0 +1,16 @@
+@import "../tokens.css";
+
+@layer components {
+  .ath-button-group {
+    display: flex;
+    gap: 5px;
+  }
+
+  .ath-button-group-direction-row {
+    flex-direction: row;
+  }
+
+  .ath-button-group-direction-column {
+    flex-direction: column;
+  }
+}

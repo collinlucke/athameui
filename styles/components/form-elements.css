@@ -27,7 +27,7 @@
   }
 
   .ath-form-input-label-above {
-    flex-direction: column;
+    /* flex-direction: column; */
     margin-bottom: 0.25rem;
   }
 

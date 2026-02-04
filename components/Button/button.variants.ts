@@ -20,19 +20,10 @@ export const buttonVariants = {
     outline: "ath-button-outline",
     ghost: "ath-button-ghost",
   },
-
   dark: "ath-button-dark",
-} as const;
-
-export const ButtonGroupVariants = {
-  direction: {
-    row: "ath-button-group-direction-row",
-    column: "ath-button-group-direction-column",
-  },
 } as const;
 
 export type ButtonSize = keyof typeof buttonVariants.size;
 export type ButtonVariant = keyof typeof buttonVariants.variant;
 export type ButtonDark = typeof buttonVariants.dark;
 export type ButtonTextPosition = keyof typeof buttonVariants.textPosition;
-export type ButtonGroupDirection = keyof typeof ButtonGroupVariants.direction;

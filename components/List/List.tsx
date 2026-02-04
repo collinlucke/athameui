@@ -1,52 +1,32 @@
 import type { ReactElement } from "react";
+import { CSSObject } from "@emotion/react";
 import { cx } from "../../utils/cx";
 
 type ListProps = {
   children?: ReactElement[] | string[];
-  className?:
-    | string
-    | {
-        list?: string | false | null | undefined;
-      }
-    | false
-    | undefined
-    | null;
-  ariaLabel?: string;
-  ariaLabelledBy?: string;
-  ariaDescribedBy?: string;
-  role?: "list" | "menu" | "menubar" | "tablist" | "tree" | "grid";
-  dataTestId?: string;
+  className?: {
+    list?: string | false | null | undefined;
+  };
   ordered?: boolean;
+  role?: "list" | "menu" | "menubar" | "tablist" | "tree" | "grid";
+  sx?: {
+    list?: CSSObject;
+  };
 };
 
 export const List = ({
   className,
   children,
-  ariaLabel,
-  ariaLabelledBy,
-  ariaDescribedBy,
-  role = "list",
-  dataTestId,
   ordered = false,
+  role = "list",
+  sx,
 }: ListProps) => {
   const ListType = ordered ? "ol" : "ul";
 
-  const classes = cx(
-    "ath-list",
-    typeof className === "object" && className !== null
-      ? className.list
-      : className,
-  );
+  const classes = cx("ath-list", className?.list);
 
   return (
-    <ListType
-      className={classes}
-      role={role}
-      aria-label={ariaLabel}
-      aria-labelledby={ariaLabelledBy}
-      aria-describedby={ariaDescribedBy}
-      data-testid={dataTestId}
-    >
+    <ListType className={classes} role={role} css={sx?.list}>
       {children}
     </ListType>
   );

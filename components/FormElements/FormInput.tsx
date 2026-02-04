@@ -4,6 +4,7 @@ import { cx } from "../../utils/cx";
 import { FormInputLabel } from "./FormInputLabel";
 
 export type FormInputProps = {
+  autoComplete?: string;
   autoFocus?: boolean;
   autoResize?: boolean;
   className?: {
@@ -48,7 +49,9 @@ export type FormInputProps = {
   value?: string | number;
 
   onChange: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
   ) => void;
   onKeyDown?: React.KeyboardEventHandler<
     HTMLInputElement | HTMLTextAreaElement
@@ -56,6 +59,7 @@ export type FormInputProps = {
 };
 
 export const FormInput: React.FC<FormInputProps> = ({
+  autoComplete,
   autoFocus = false,
   autoResize = false,
   className,
@@ -159,6 +163,7 @@ export const FormInput: React.FC<FormInputProps> = ({
   const inputElement =
     type === "textarea" ? (
       <textarea
+        autoComplete={autoComplete}
         autoFocus={autoFocus}
         ref={textAreaRef}
         name={name}
@@ -175,6 +180,7 @@ export const FormInput: React.FC<FormInputProps> = ({
       />
     ) : (
       <input
+        autoComplete={autoComplete}
         autoFocus={autoFocus}
         name={name}
         type={type}

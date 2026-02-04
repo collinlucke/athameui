@@ -202,20 +202,6 @@
     padding: 0;
   }
 
-  /* ----- ButtonGroup Styles ----- */
-  .ath-button-group {
-    display: flex;
-    gap: 5px;
-  }
-
-  .ath-button-group-direction-row {
-    flex-direction: row;
-  }
-
-  .ath-button-group-direction-column {
-    flex-direction: column;
-  }
-
   /* ----- ScrollToTopButton Styles ----- */
   .ath-scroll-to-top-button {
     position: fixed;

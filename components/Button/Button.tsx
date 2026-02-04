@@ -14,14 +14,14 @@ import {
 import { CSSObject } from "@emotion/react";
 
 export type ButtonProps = {
-  children?: ReactElement | string;
+  children?: React.ReactNode | string;
   className?: {
     button?: string | false | null | undefined;
     icon?: string | false | null | undefined;
   };
   dark?: boolean;
   disabled?: boolean;
-  icon?: React.ComponentType<{ className?: string }> | string;
+  icon?: ReactElement | string;
   size?: ButtonSize;
   sx?: CSSObject | { button?: CSSObject; icon?: CSSObject };
   title?: string;
@@ -43,7 +43,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       className,
       dark = false,
       disabled = false,
-      icon: Icon,
+      icon,
       size = "medium",
       sx,
       tabIndex,
@@ -59,7 +59,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref,
   ) => {
-    const isIconOnly = Icon && !children;
+    const isIconOnly = icon && !children;
 
     const sharedClasses = cx(
       "ath-button",
@@ -75,14 +75,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       typeof className === "object" && className !== null
         ? className.button
         : className,
-    );
-
-    const iconClasses = cx(
-      sharedClasses,
-      "ath-button-icon",
-      typeof className === "object" && className !== null
-        ? className.icon
-        : undefined,
     );
 
     const onClickHandler: MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -115,13 +107,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         onBlur={onBlurHandler}
         {...rest}
       >
-        {Icon ? (
+        {icon ? (
           <>
-            <Icon
-              className={iconClasses}
-              css={sx?.icon ? sx.icon : undefined}
-            />
-
+            {icon}
             {!isIconOnly && children}
           </>
         ) : (

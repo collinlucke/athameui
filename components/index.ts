@@ -1,10 +1,10 @@
-export * from "./Button";
-export * from "./Header";
 export * from "./Accordion";
-export * from "./List";
-export * from "./Layout";
-export * from "./Search";
-export * from "./FormElements";
+export * from "./Avatar";
+export * from "./Button";
 export * from "./ContainerScalingText";
-// export * from "./AthameRouter";
-// export * from "./Link";
+export * from "./FormElements";
+export * from "./Header";
+export * from "./Layout";
+export * from "./List";
+export * from "./Modal";
+export * from "./Search";
