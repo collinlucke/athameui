@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { FormInput } from "../FormElements";
+import { FormField } from "../FormField";
 import { Button } from "../Button";
 import { cx } from "../../utils/cx";
 import { CSSObject } from "@emotion/react";
@@ -18,6 +18,7 @@ type SearchProps = {
     searchButton?: string | CSSObject;
   };
   dark?: boolean;
+  id?: string;
   inputSize?: "large" | "medium" | "small";
   label?: string;
   labelPosition?: "left" | "right" | "above" | "below";
@@ -49,6 +50,7 @@ export const Search = ({
   buttonVariant = "primary",
   className,
   dark = false,
+  id,
   inputSize,
   label,
   labelPosition = "above",
@@ -65,7 +67,7 @@ export const Search = ({
   onSearch,
   setSearchTerm,
 
-  ...rest
+  ...other
 }: SearchProps) => {
   const setSearchTermHandler = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -93,7 +95,7 @@ export const Search = ({
       )}
       css={sx?.searchForm}
       role={searchRole || "search"}
-      {...rest}
+      {...other}
     >
       <div
         className={cx(
@@ -123,8 +125,9 @@ export const Search = ({
         )}
 
         <div className="ath-search-input-wrapper">
-          <FormInput
+          <FormField
             type="search"
+            id={id}
             value={searchTerm || ""}
             name="searchTerm"
             labelPosition={labelPosition}

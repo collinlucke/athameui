@@ -1,49 +1,6 @@
 @import "../tokens.css";
 
 @layer component {
-  /* ----- Form Input Label Styles ----- */
-  .ath-form-input-label {
-    font-size: var(--font-size-md);
-    font-weight: 500;
-    display: flex;
-    gap: 0.25rem;
-    color: var(--color-primary-900);
-  }
-
-  .ath-form-input-label-dark {
-    color: var(--color-tertiary-50);
-  }
-
-  .ath-form-input-label-left {
-    flex-direction: row;
-    margin-right: 0.5rem;
-    align-self: flex-start;
-  }
-
-  .ath-form-input-label-right {
-    flex-direction: row-reverse;
-    margin-left: 0.5rem;
-    align-self: flex-end;
-  }
-
-  .ath-form-input-label-above {
-    /* flex-direction: column; */
-    margin-bottom: 0.25rem;
-  }
-
-  .ath-form-input-label-below {
-    flex-direction: column-reverse;
-    margin-top: 0.25rem;
-  }
-
-  .ath-form-input-label-required {
-    color: var(--color-error-500);
-    font-size: var(--font-size-md);
-  }
-
-  /* ----- Form Input Styles ----- */
-
-  /* Container styles */
   .ath-form-input-container {
     display: flex;
     flex-direction: column;
@@ -59,7 +16,7 @@
   }
 
   /* Base input styles */
-  .ath-form-input {
+  .ath-form-text-input {
     margin-top: 3px;
     border-radius: var(--radius-md);
     border: none;
@@ -68,26 +25,26 @@
     transition: all 0.2s ease;
     min-width: 0;
   }
-  .ath-form-input:focus {
+  .ath-form-text-input:focus {
     outline: 2px solid var(--color-primary-vibrant-500);
     outline-offset: 2px;
     border-color: var(--color-primary-vibrant-500);
   }
-  .ath-form-input::placeholder {
+  .ath-form-text-input::placeholder {
     color: var(--color-primary-300);
   }
 
   /* Size variants */
-  .ath-form-input-large {
+  .ath-form-text-input-large {
     padding: 0.75rem;
     font-size: var(--font-size-lg);
   }
-  .ath-form-input-medium {
+  .ath-form-text-input-medium {
     font-size: var(--font-size-md);
     line-height: var(--font-size-lg);
     padding: 8px 15px;
   }
-  .ath-form-input-small {
+  .ath-form-text-input-small {
     padding: 0.3rem;
     font-size: var(--font-size-xs);
   }
@@ -119,11 +76,11 @@
   }
 
   /* State variants */
-  .ath-form-input-error,
+  .ath-form-text-input-error,
   .ath-form-textarea-error {
     border-color: var(--color-error-vibrant-500);
   }
-  .ath-form-input-error:focus,
+  .ath-form-text-input-error:focus,
   .ath-form-textarea-error:focus {
     outline: 2px solid var(--color-error-vibrant-500);
     border-color: var(--color-error-vibrant-500);

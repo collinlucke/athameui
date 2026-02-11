@@ -52,7 +52,8 @@
 
   .ath-modal-content {
     padding: 1.5rem;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     flex: 1;
     display: flex;
     justify-content: center;

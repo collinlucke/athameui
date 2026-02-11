@@ -3,7 +3,8 @@
 @import "./components/button.css";
 @import "./components/button-group.css";
 @import "./components/footer.css";
-@import "./components/form-elements.css";
+@import "./components/form-input.css";
+@import "./components/form-label.css";
 @import "./components/header.css";
 @import "./components/list.css";
 @import "./components/main.css";

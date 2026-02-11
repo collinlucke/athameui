@@ -1,0 +1,42 @@
+@import "../tokens.css";
+
+@layer components {
+  .ath-form-input-label {
+    font-size: var(--font-size-md);
+    font-weight: 500;
+    display: flex;
+    gap: 0.25rem;
+    color: var(--color-primary-900);
+  }
+
+  .ath-form-input-label-dark {
+    color: var(--color-tertiary-50);
+  }
+
+  .ath-form-input-label-left {
+    flex-direction: row;
+    margin-right: 0.5rem;
+    align-self: flex-start;
+  }
+
+  .ath-form-input-label-right {
+    flex-direction: row-reverse;
+    margin-left: 0.5rem;
+    align-self: flex-end;
+  }
+
+  .ath-form-input-label-above {
+    /* flex-direction: column; */
+    margin-bottom: 0.25rem;
+  }
+
+  .ath-form-input-label-below {
+    flex-direction: column-reverse;
+    margin-top: 0.25rem;
+  }
+
+  .ath-form-input-label-required {
+    color: var(--color-error-500);
+    font-size: var(--font-size-md);
+  }
+}

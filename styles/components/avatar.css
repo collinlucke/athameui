@@ -2,16 +2,37 @@
 
 @layer components {
   .ath-avatar {
-    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: var(--color-secondary-700);
-  }
-
-  .ath-avatar-initials {
+    border-radius: 50%;
     color: var(--color-tertiary-100);
     font-weight: 500;
+  }
+
+  .ath-avatar-small {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+  }
+
+  .ath-avatar-medium {
+    width: 42px;
+    height: 42px;
+    font-size: 24px;
+  }
+
+  .ath-avatar-large {
+    width: 64px;
+    height: 64px;
+    font-size: 32px;
+  }
+
+  .ath-avatar-profile {
+    width: 135px;
+    height: 135px;
+    font-size: 60px;
   }
 
   .ath-avatar-image {

@@ -55,7 +55,7 @@ export const Modal: React.FC<ModalProps> = ({
   sx,
 
   onClose,
-  ...rest
+  ...other
 }) => {
   const [previouslyFocusedElement, setPreviouslyFocusedElement] =
     React.useState<HTMLElement | null>(null);
@@ -176,7 +176,7 @@ export const Modal: React.FC<ModalProps> = ({
         css={sx?.modal}
         className={modalClasses}
         role="dialog"
-        {...rest}
+        {...other}
       >
         {(title || showCloseButton) && (
           <div css={sx?.header} className={headerClasses}>

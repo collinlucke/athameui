@@ -2,9 +2,11 @@
 import React, { ReactNode, useRef, useLayoutEffect } from "react";
 import { CSSObject } from "@emotion/react";
 import { cx } from "../../utils/cx";
-import { FormInputLabel } from "./FormInputLabel";
+import { FormLabel } from "../FormLabel";
+import { FormTextInput } from "../FormTextInput";
+import "../FormTextInput";
 
-export type FormInputProps = {
+export type FormFieldProps = {
   autoComplete?: string;
   autoFocus?: boolean;
   autoResize?: boolean;
@@ -20,11 +22,12 @@ export type FormInputProps = {
   disabled?: boolean;
   error?: string;
   helperText?: string | ReactNode;
+  id?: string;
   label?: string | ReactNode;
   labelPosition?: "left" | "right" | "above" | "below";
   name?: string;
   placeholder?: string;
-  readonly?: boolean;
+  readOnly?: boolean;
   required?: boolean;
   role?: string;
   size?: "large" | "medium" | "small";
@@ -59,7 +62,7 @@ export type FormInputProps = {
   >;
 };
 
-export const FormInput: React.FC<FormInputProps> = ({
+export const FormField: React.FC<FormFieldProps> = ({
   autoComplete,
   autoFocus = false,
   autoResize = false,
@@ -68,11 +71,12 @@ export const FormInput: React.FC<FormInputProps> = ({
   disabled = false,
   error,
   helperText,
+  id,
   label,
   labelPosition = "above",
   name,
   placeholder,
-  readonly = false,
+  readOnly = false,
   required = false,
   size = "medium",
   sx,
@@ -82,7 +86,7 @@ export const FormInput: React.FC<FormInputProps> = ({
 
   onChange,
   onKeyDown,
-  ...rest
+  ...other
 }) => {
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -96,7 +100,7 @@ export const FormInput: React.FC<FormInputProps> = ({
   const inputSharedClasses = cx(
     `ath-form-input-${size}`,
     disabled && "ath-form-input-shared-disabled",
-    readonly && "ath-form-input-shared-readonly",
+    readOnly && "ath-form-input-shared-readonly",
     dark && "ath-form-input-shared-dark",
     className?.input ? className.input : "",
   );
@@ -151,10 +155,10 @@ export const FormInput: React.FC<FormInputProps> = ({
   }, [autoResize, type]);
 
   const labelElement = label ? (
-    <FormInputLabel
+    <FormLabel
       label={label}
       required={required}
-      htmlFor={name}
+      htmlFor={id}
       className={labelClasses}
       sx={{ label: sx?.label, required: sx?.required }}
       labelPosition={labelPosition}
@@ -171,31 +175,33 @@ export const FormInput: React.FC<FormInputProps> = ({
         name={name}
         onChange={handleTextAreaChange}
         disabled={disabled}
-        readOnly={readonly}
+        readOnly={readOnly}
         onKeyDown={onKeyDown}
         tabIndex={disabled ? -1 : tabIndex}
         className={textAreaClasses}
         css={sx?.input}
         value={value}
         placeholder={placeholder}
-        {...rest}
+        {...other}
       />
     ) : (
-      <input
+      <FormTextInput
         autoComplete={autoComplete}
         autoFocus={autoFocus}
         name={name}
         type={type}
         onChange={handleInputChange}
         disabled={disabled}
-        readOnly={readonly}
+        readOnly={readOnly}
         onKeyDown={onKeyDown}
         tabIndex={disabled ? -1 : tabIndex}
-        className={inputClasses}
+        className={{ input: inputClasses }}
         css={sx?.input}
         value={value}
         placeholder={placeholder}
-        {...rest}
+        size={size}
+        id={id}
+        {...other}
       />
     );
 

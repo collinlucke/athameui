@@ -55,7 +55,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       onClick,
       onFocus,
       onKeyDown,
-      ...rest
+      ...other
     },
     ref,
   ) => {
@@ -105,7 +105,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         onKeyDown={onKeyDownHandler}
         onFocus={onFocusHandler}
         onBlur={onBlurHandler}
-        {...rest}
+        {...other}
       >
         {icon ? (
           <>

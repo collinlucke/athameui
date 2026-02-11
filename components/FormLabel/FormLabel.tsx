@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import { CSSObject } from "@emotion/react";
 import { cx } from "../../utils/cx";
 
-type LabelProps = React.LabelHTMLAttributes<HTMLLabelElement> & {
+type FormLabelProps = React.LabelHTMLAttributes<HTMLLabelElement> & {
   label: string | ReactNode;
   required?: boolean;
   className?: {
@@ -15,15 +15,15 @@ type LabelProps = React.LabelHTMLAttributes<HTMLLabelElement> & {
   sx?: { label?: CSSObject; required?: CSSObject };
 };
 
-export const FormInputLabel = ({
+export const FormLabel = ({
   label,
   required,
   className,
   labelPosition = "above",
   dark,
   sx,
-  ...rest
-}: LabelProps) => {
+  ...other
+}: FormLabelProps) => {
   const labelClasses = cx(
     "ath-form-input-label",
     labelPosition ? `ath-form-input-label-${labelPosition}` : "",
@@ -38,7 +38,7 @@ export const FormInputLabel = ({
   );
 
   return (
-    <label className={labelClasses} css={sx?.label} {...rest}>
+    <label className={labelClasses} css={sx?.label} {...other}>
       {label}
       {required && (
         <span
