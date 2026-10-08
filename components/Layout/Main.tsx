@@ -4,28 +4,35 @@ import { cx } from "../../utils";
 
 type MainProps = {
   children?: React.ReactNode;
-  className?:
-    | string
-    | {
-        main?: string | false | null | undefined;
-      }
-    | false
-    | undefined
-    | null;
-  sx?: CSSObject;
+  className?: {
+    main?: string | false | null | undefined;
+    mainContent?: string | false | null | undefined;
+  };
+
+  sx?: {
+    main?: CSSObject;
+    mainContent?: CSSObject;
+  };
 };
 
 export const Main = ({ children, className, sx }: MainProps) => {
-  const classes = cx(
+  const mainClasses = cx(
     "ath-main",
+    typeof className === "object" && className !== null ? className.main : "",
+  );
+
+  const mainContentClasses = cx(
+    "ath-main-content",
     typeof className === "object" && className !== null
-      ? className.main
-      : className,
+      ? className.mainContent
+      : "",
   );
 
   return (
-    <main css={sx} className={classes}>
-      {children}
+    <main css={sx?.main} className={mainClasses}>
+      <div css={sx?.mainContent} className={mainContentClasses}>
+        {children}
+      </div>
     </main>
   );
 };

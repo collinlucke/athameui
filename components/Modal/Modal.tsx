@@ -4,7 +4,7 @@ import { CSSObject } from "@emotion/react";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { CancelCircleIcon } from "@hugeicons/core-free-icons";
 import { Button } from "../Button/Button";
-import { cx } from "../../main";
+import { cx } from "../../utils/cx";
 
 export type ModalProps = {
   isOpen: boolean;

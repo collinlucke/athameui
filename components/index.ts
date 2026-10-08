@@ -1,7 +1,9 @@
 export * from "./Accordion";
 export * from "./Avatar";
+export * from "./Block";
 export * from "./Button";
 export * from "./ButtonGroup";
+export * from "./DropDown";
 export * from "./ContainerScalingText";
 export * from "./FormField";
 export * from "./FormLabel";
@@ -11,3 +13,4 @@ export * from "./Layout";
 export * from "./List";
 export * from "./Modal";
 export * from "./Search";
+export * from "./SlideOut";

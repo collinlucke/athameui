@@ -126,36 +126,46 @@
   --radius-lg: 8px;
 
   /* ----- Font Sizes ----- */
-  --font-size-xs: 0.625rem;
-  --font-size-sm: 0.75rem;
-  --font-size-md: 0.875rem;
-  --font-size-lg: 1rem;
-  --font-size-xl: 1.25rem;
-  --font-size-2xl: 1.5rem;
-  --font-size-3xl: 2rem;
-  --font-size-4xl: 2.5rem;
-  --font-size-5xl: 3rem;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+  --font-size-3xl: 2.5rem;
+  --font-size-4xl: 3rem;
+  --font-size-5xl: 3.5rem;
 
   /* ----- Screen Sizes ----- */
-  --screen-xs: 360px;
+  /* --screen-xs: 320px;
   --screen-sm: 480px;
-  --screen-md: 768px;
-  --screen-lg: 896px;
-  --screen-xl: 1024px;
-  --screen-2xl: 1280px;
-  --screen-3xl: 1536px;
+  --screen-md: 620px;
+  --screen-lg: 768px;
+  --screen-xl: 896px;
+  --screen-2xl: 1024px;
+  --screen-3xl: 1280px;
+  --screen-4xl: 1536px; */
+
+  --screen-xs: 320;
+  --screen-sm: 480;
+  --screen-md: 620;
+  --screen-lg: 768;
+  --screen-xl: 896;
+  --screen-2xl: 1024;
+  --screen-3xl: 1280;
+  --screen-4xl: 1536;
 
   /* ----- Media Queries ----- */
   /* Only useful for CSS-in-JS media query handling */
-  --media-min-xs: @media (min-width: 360px);
+  --media-min-xs: @media (min-width: 320px);
   --media-min-sm: @media (min-width: 480px);
-  --media-min-md: @media (min-width: 768px);
-  --media-min-lg: @media (min-width: 896px);
-  --media-min-xl: @media (min-width: 1024px);
-  --media-min-2xl: @media (min-width: 1280px);
-  --media-min-3xl: @media (min-width: 1536px);
+  --media-min-md: @media (min-width: 620px);
+  --media-min-lg: @media (min-width: 768px);
+  --media-min-xl: @media (min-width: 896px);
+  --media-min-2xl: @media (min-width: 1024px);
+  --media-min-3xl: @media (min-width: 1280px);
 
-  --media-max-xs: @media (max-width: 359px);
+  --media-max-xs: @media (max-width: 319px);
   --media-max-sm: @media (max-width: 479px);
   --media-max-md: @media (max-width: 767px);
   --media-max-lg: @media (max-width: 895px);
@@ -174,30 +184,39 @@
     -moz-osx-font-smoothing: grayscale;
     margin: 0;
   }
+
   h1 {
     color: var(--color-text-light);
-    font-size: var(--font-size-3xl);
+    font-size: var(--font-size-2xl);
+    /* font-size: var(--font-size-3xl); */
     font-weight: 300;
     margin: 0 0 1rem;
     line-height: normal;
+    @media (max-width: var(--screen-lg)) {
+      font-size: var(--font-size-4xl);
+    }
   }
+
   h2 {
     color: var(--color-primary-300);
     font-size: var(--font-size-lg);
     font-weight: 400;
     margin: 0;
   }
+
   h3 {
     color: var(--color-primary-200);
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-lg);
     font-weight: 500;
-    margin: 0;
+    margin: 0 0 0.5rem 0;
   }
+
   p {
     margin: 0;
     margin-bottom: 1rem;
     line-height: 1.5;
   }
+
   button {
     font-family: inherit;
     background-color: transparent;
@@ -207,6 +226,7 @@
       outline: none;
     }
   }
+
   a {
     text-decoration: none;
     color: inherit;

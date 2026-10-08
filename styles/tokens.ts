@@ -5,15 +5,15 @@ export const tokens = {
       serif: "Libre Baskerville, serif"
     },
     size: {
-      xs: "0.625rem",
-      sm: "0.75rem",
-      md: "0.875rem",
-      lg: "1rem",
-      xl: "1.25rem",
-      "2xl": "1.5rem",
-      "3xl": "2rem",
-      "4xl": "2.5rem",
-      "5xl": "3rem"
+      xs: "0.75rem",
+      sm: "0.875rem",
+      md: "1rem",
+      lg: "1.25rem",
+      xl: "1.5rem",
+      "2xl": "2rem",
+      "3xl": "2.5rem",
+      "4xl": "3rem",
+      "5xl": "3.5rem"
     }
   },
   color: {
@@ -146,27 +146,18 @@ export const tokens = {
     md: "5px",
     lg: "8px"
   },
-  screen: {
-    xs: "360px",
-    sm: "480px",
-    md: "768px",
-    lg: "896px",
-    xl: "1024px",
-    "2xl": "1280px",
-    "3xl": "1536px"
-  },
   media: {
     min: {
-      xs: "@media (min-width: 360px)",
+      xs: "@media (min-width: 320px)",
       sm: "@media (min-width: 480px)",
-      md: "@media (min-width: 768px)",
-      lg: "@media (min-width: 896px)",
-      xl: "@media (min-width: 1024px)",
-      "2xl": "@media (min-width: 1280px)",
-      "3xl": "@media (min-width: 1536px)"
+      md: "@media (min-width: 620px)",
+      lg: "@media (min-width: 768px)",
+      xl: "@media (min-width: 896px)",
+      "2xl": "@media (min-width: 1024px)",
+      "3xl": "@media (min-width: 1280px)"
     },
     max: {
-      xs: "@media (max-width: 359px)",
+      xs: "@media (max-width: 319px)",
       sm: "@media (max-width: 479px)",
       md: "@media (max-width: 767px)",
       lg: "@media (max-width: 895px)",
@@ -184,5 +175,4 @@ export type FontTokens = typeof tokens.font;
 export type ColorTokens = typeof tokens.color;
 export type PaddingTokens = typeof tokens.padding;
 export type RadiusTokens = typeof tokens.radius;
-export type ScreenTokens = typeof tokens.screen;
 export type MediaTokens = typeof tokens.media;

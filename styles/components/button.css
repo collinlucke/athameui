@@ -116,7 +116,7 @@
   .ath-button-full {
     font-size: var(--font-size-lg);
     line-height: var(--font-size-xl);
-    width: 100%;
+    /* width: 100%; */
     justify-content: center;
     padding: 10px 40px;
 

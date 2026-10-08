@@ -1,0 +1,69 @@
+@import "../tokens.css";
+
+@layer components {
+  .ath-slide-out {
+    display: flex;
+    overflow: hidden;
+  }
+
+  .ath-slide-out-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 100;
+    display: flex;
+    justify-content: flex-end;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.3s ease,
+      visibility 0.3s ease;
+  }
+
+  .ath-slide-out-overlay-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .ath-slide-out-panel {
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    background-color: var(--color-primary-500);
+    width: 280px;
+    height: 100%;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.1s ease-in-out;
+  }
+
+  .ath-slide-out-from-left {
+    left: 0;
+    transform: translateX(-100%);
+  }
+
+  .ath-slide-out-from-right {
+    right: 0;
+    transform: translateX(100%);
+  }
+
+  .ath-slide-out-panel-open {
+    transform: translateX(0);
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .ath-slide-out-close-button {
+    padding: 0;
+    align-self: flex-end;
+    margin-bottom: 10px;
+
+    &:hover {
+      box-shadow: none;
+    }
+  }
+}
