@@ -57,6 +57,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       onClick,
       onFocus,
       onKeyDown,
+      onMouseEnter,
+      onMouseLeave,
       ...other
     },
     ref,
@@ -93,6 +95,14 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const onBlurHandler = (e: React.FocusEvent<HTMLButtonElement>) => {
       onBlur?.(e);
+    };
+
+    const onMouseEnterHandler: MouseEventHandler<HTMLButtonElement> = (e) => {
+      onMouseEnter?.(e);
+    };
+
+    const onMouseLeaveHandler: MouseEventHandler<HTMLButtonElement> = (e) => {
+      onMouseLeave?.(e);
     };
 
     return (
