@@ -24,6 +24,12 @@
     outline-offset: -1px;
     transition: all 0.2s ease;
     min-width: 0;
+    &:read-only {
+      background-color: transparent;
+      outline: none;
+      color: var(--color-tertiary-600);
+    padding-left: 0;
+    }
   }
   .ath-form-text-input:focus {
     outline: 2px solid var(--color-primary-vibrant-500);
@@ -52,13 +58,16 @@
   /* Textarea specific */
   .ath-form-textarea {
     margin-top: 3px;
+    font-size: inherit;
+    line-height: 1.5;
+    padding: 0.75rem;
     border: 1px solid var(--color-tertiary-500);
     border-radius: var(--radius-md);
     transition:
       border-color 0.2s ease,
       box-shadow 0.2s ease;
     min-width: 0;
-    min-height: 3rem;
+    min-height: 6rem;
     resize: vertical;
     overflow: auto;
   }

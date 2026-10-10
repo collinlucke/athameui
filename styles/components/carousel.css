@@ -1,0 +1,43 @@
+@import "../tokens.css";
+
+@layer components {
+  .ath-carousel-wrapper {
+    position: relative;
+  }
+  .ath-carousel {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    border: 5px solid var(--color-secondary-800);
+    border-radius: 10px;
+    padding: 10px;
+    overflow-x: auto;
+    gap: 10px;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  .ath-carousel-arrow {
+    position: absolute;
+    border-radius: 50%;
+    background-color: var(--color-secondary-200);
+    opacity: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    transition: opacity 0.2s ease-in-out;
+  }
+  .ath-carousel-left-arrow {
+    left: 5px;
+  }
+  .ath-carousel-right-arrow {
+    right: 5px;
+  }
+  .ath-carousel-hover {
+    .ath-carousel-arrow {
+      opacity: 0.75;
+    }
+  }
+}

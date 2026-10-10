@@ -54,7 +54,6 @@ export const Dropdown = ({
       css={sx?.dropdown}
       data-testid="dropdown"
     >
-      fdpdsugfpoidsuy
       {children}
     </div>
   );

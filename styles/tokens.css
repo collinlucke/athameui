@@ -136,16 +136,6 @@
   --font-size-4xl: 3rem;
   --font-size-5xl: 3.5rem;
 
-  /* ----- Screen Sizes ----- */
-  /* --screen-xs: 320px;
-  --screen-sm: 480px;
-  --screen-md: 620px;
-  --screen-lg: 768px;
-  --screen-xl: 896px;
-  --screen-2xl: 1024px;
-  --screen-3xl: 1280px;
-  --screen-4xl: 1536px; */
-
   --screen-xs: 320;
   --screen-sm: 480;
   --screen-md: 620;
@@ -175,6 +165,12 @@
 }
 
 @layer base {
+
+  *,
+  ::before,
+  ::after {
+    box-sizing: border-box;
+  }
   body {
     background-color: var(--color-primary-500);
     color: var(--color-text-light);

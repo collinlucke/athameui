@@ -24,7 +24,6 @@ export const Avatar = ({
   sx,
   size = "medium",
 }: AvatarProps) => {
-  console.log(className?.avatar);
   const initials = displayName.split(" ").map((n) => n[0].toUpperCase());
   const avatarClasses = cx(
     "ath-avatar",

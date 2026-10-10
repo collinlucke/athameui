@@ -3,6 +3,7 @@ export * from "./Avatar";
 export * from "./Block";
 export * from "./Button";
 export * from "./ButtonGroup";
+export * from "./Carousel";
 export * from "./DropDown";
 export * from "./ContainerScalingText";
 export * from "./FormField";

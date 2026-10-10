@@ -34,6 +34,8 @@ export type ButtonProps = {
   onClick?: MouseEventHandler<HTMLButtonElement>;
   onFocus?: (event: React.FocusEvent<HTMLButtonElement>) => void;
   onKeyDown?: KeyboardEventHandler<HTMLButtonElement>;
+  onMouseEnter?: MouseEventHandler<HTMLButtonElement>;
+  onMouseLeave?: MouseEventHandler<HTMLButtonElement>;
 };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -105,6 +107,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         onKeyDown={onKeyDownHandler}
         onFocus={onFocusHandler}
         onBlur={onBlurHandler}
+        onMouseEnter={onMouseEnterHandler}
+        onMouseLeave={onMouseLeaveHandler}
         {...other}
       >
         {icon ? (
