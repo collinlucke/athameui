@@ -29,6 +29,7 @@ export type ButtonProps = {
   textPosition?: "left" | "center" | "right";
   type?: "button" | "submit" | "reset";
   variant?: ButtonVariant;
+  wrap?: boolean;
 
   onBlur?: (event: React.FocusEvent<HTMLButtonElement>) => void;
   onClick?: MouseEventHandler<HTMLButtonElement>;
@@ -52,6 +53,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       type = "button",
       textPosition = "center",
       variant = "secondary",
+      wrap = false,
 
       onBlur,
       onClick,
@@ -63,6 +65,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref,
   ) => {
+    console.log(sx);
     const isIconOnly = icon && !children;
 
     const sharedClasses = cx(
@@ -71,6 +74,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       buttonVariants.variant[variant],
       isIconOnly ? "ath-button-icon-only" : "",
       dark ? buttonVariants.dark : "",
+      wrap ? buttonVariants.wrap : "",
     );
 
     const buttonClasses = cx(

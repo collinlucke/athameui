@@ -7,7 +7,6 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    white-space: nowrap;
 
     transition:
       box-shadow 0.2s ease-in-out,
@@ -66,6 +65,10 @@
         text-shadow: 0 0 10px rgba(255, 255, 255, 1);
       }
     }
+  }
+
+  .ath-button-wrap {
+    white-space: nowrap;
   }
 
   .ath-button-small {

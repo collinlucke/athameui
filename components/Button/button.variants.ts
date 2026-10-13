@@ -21,6 +21,7 @@ export const buttonVariants = {
     ghost: "ath-button-ghost",
   },
   dark: "ath-button-dark",
+  wrap: "ath-button-wrap",
 } as const;
 
 export type ButtonSize = keyof typeof buttonVariants.size;
