@@ -65,7 +65,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref,
   ) => {
-    console.log(sx);
     const isIconOnly = icon && !children;
 
     const sharedClasses = cx(

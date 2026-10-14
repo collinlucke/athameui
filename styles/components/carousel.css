@@ -30,14 +30,21 @@
     transition: opacity 0.2s ease-in-out;
   }
   .ath-carousel-left-arrow {
-    left: 5px;
+    left: 10px;
   }
   .ath-carousel-right-arrow {
-    right: 5px;
+    right: 10px;
   }
   .ath-carousel-hover {
     .ath-carousel-arrow {
       opacity: 0.75;
     }
+  }
+  .ath-carousel-empty {
+    display: flex;
+    align-items: center;
+    min-height: 4rem;
+    padding: 1rem;
+    color: var(--color-tertiary-300);
   }
 }

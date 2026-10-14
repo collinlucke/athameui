@@ -165,7 +165,6 @@
 }
 
 @layer base {
-
   *,
   ::before,
   ::after {
@@ -175,7 +174,6 @@
     background-color: var(--color-primary-500);
     color: var(--color-text-light);
     font-family: var(--font-family-sans);
-    font-size: var(--font-size-md);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     margin: 0;
@@ -184,7 +182,6 @@
   h1 {
     color: var(--color-text-light);
     font-size: var(--font-size-2xl);
-    /* font-size: var(--font-size-3xl); */
     font-weight: 300;
     margin: 0 0 1rem;
     line-height: normal;

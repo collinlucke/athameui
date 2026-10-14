@@ -19,7 +19,7 @@ export type CarouselProps = {
 export const Carousel = ({
   children,
   className,
-  emptyMessage,
+  emptyMessage = "Nothing here yet",
   sx,
 }: CarouselProps) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -70,7 +70,11 @@ export const Carousel = ({
           onMouseLeave={handleMouseLeave}
           icon={<HugeiconsIcon icon={ArrowLeftIcon} size={36} />}
         />
-        {hasItems ? children : emptyMessage}
+        {hasItems ? (
+          children
+        ) : (
+          <div className="ath-carousel-empty">{emptyMessage}</div>
+        )}
         <Button
           className={{ button: "ath-carousel-arrow ath-carousel-right-arrow" }}
           onClick={handleRightArrowClick}

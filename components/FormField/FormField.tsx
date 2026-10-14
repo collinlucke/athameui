@@ -92,6 +92,7 @@ export const FormField: React.FC<FormFieldProps> = ({
 
   const containerClasses = cx(
     "ath-form-input-container",
+    readOnly && "ath-form-input-container-readonly",
     (labelPosition === "left" || labelPosition === "right") &&
       "ath-form-input-container-horizontal",
     className?.container ? className.container : "",
