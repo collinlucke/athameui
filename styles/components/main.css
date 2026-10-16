@@ -17,9 +17,24 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
-    width: 100%;
     margin-inline: auto;
-    max-width: 1200px;
     padding: 0 15px;
+    width: 100%;
+    /* Default to `medium` if no width is provided */
+    &.full {
+      margin-inline: auto;
+    }
+    &.wide {
+      max-width: 1200px;
+      margin-inline: auto;
+    }
+    &.medium {
+      max-width: 768px;
+      margin-inline: auto;
+    }
+    &.narrow {
+      max-width: 480px;
+      margin-inline: auto;
+    }
   }
 }

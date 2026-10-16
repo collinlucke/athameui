@@ -181,9 +181,9 @@ export const Modal: React.FC<ModalProps> = ({
         {(title || showCloseButton) && (
           <div css={sx?.header} className={headerClasses}>
             {title && (
-              <h1 css={sx?.title} className={titleClasses} id={titleId}>
+              <h2 css={sx?.title} className={titleClasses} id={titleId}>
                 {title}
-              </h1>
+              </h2>
             )}
             {showCloseButton && (
               <Button

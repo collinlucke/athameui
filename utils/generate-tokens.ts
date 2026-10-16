@@ -1,221 +1,105 @@
 import { readFileSync, writeFileSync } from "fs";
-import { join, dirname } from "path";
+import { dirname, join } from "path";
 import { fileURLToPath } from "url";
+import { breakpoints, color, font, padding, radius } from "../styles/tokens.ts";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
-interface TokenValue {
-  [key: string]: string | TokenValue;
-}
+const COLOR_GROUPS = [
+  "primary",
+  "secondary",
+  "tertiary",
+  "error",
+  "warning",
+  "success",
+] as const;
 
-function parseTokenValue(value: string): string {
-  return value.replace(/;$/, "").trim();
-}
+const SHADES = [
+  "50",
+  "100",
+  "200",
+  "300",
+  "400",
+  "500",
+  "600",
+  "700",
+  "800",
+  "900",
+] as const;
 
-function convertCSSVariableToKey(cssVar: string): string {
-  return cssVar
-    .replace(/^--/, "")
-    .replace(/-([a-z0-9])/g, (_, letter) => {
-      if (/\d/.test(letter)) {
-        return letter.toUpperCase();
-      }
-      return letter.toUpperCase();
-    })
-    .replace(/-/g, "");
-}
+const VIBRANT_SHADES = ["300", "500", "700"] as const;
 
-function formatTokensForTS(obj: TokenValue, indent = 2): string {
-  const spaces = " ".repeat(indent);
-  const entries = Object.entries(obj);
+const fontFamily = (value: string) => {
+  const [family, ...fallback] = value.split(",").map((part) => part.trim());
+  return [`"${family}"`, ...fallback].join(", ");
+};
 
-  if (entries.length === 0) {
-    return "{}";
+const screenEntries = Object.entries(breakpoints);
+
+const lines = [
+  "/* Generated from styles/tokens.ts. Edit that file, then run pnpm generate-tokens. */",
+  ":root {",
+  `  --font-family-sans: ${fontFamily(font.family.sans)};`,
+  `  --font-family-serif: ${fontFamily(font.family.serif)};`,
+  "",
+  ...COLOR_GROUPS.map(
+    (name) => `  --color-${name}: ${color[name].default};`,
+  ),
+  `  --color-text-dark: ${color.text.dark};`,
+  `  --color-text-light: ${color.text.light};`,
+  "",
+  `  --color-background-light: ${color.background.light};`,
+  `  --color-background-dark: ${color.background.dark};`,
+];
+
+for (const name of COLOR_GROUPS) {
+  const label = name.charAt(0).toUpperCase() + name.slice(1);
+  lines.push("", `  /* ----- ${label} ----- */`);
+  for (const shade of SHADES) {
+    lines.push(`  --color-${name}-${shade}: ${color[name][shade]};`);
   }
-
-  const formatted = entries
-    .map(([key, value]) => {
-      const needsQuotes = /^\d|[^a-zA-Z0-9_$]/.test(key) || key === "default";
-      const keyStr = needsQuotes ? `"${key}"` : key;
-
-      if (typeof value === "string") {
-        let cleanValue = value;
-        if (value.includes(", sans-serif") || value.includes(", serif")) {
-          cleanValue = value.replace(/"/g, "");
-        }
-        return `${spaces}${keyStr}: "${cleanValue}"`;
-      } else {
-        const nestedValue = formatTokensForTS(value as TokenValue, indent + 2);
-        return `${spaces}${keyStr}: ${nestedValue}`;
-      }
-    })
-    .join(",\n");
-
-  return `{\n${formatted}\n${" ".repeat(indent - 2)}}`;
-}
-
-function organizeTokens(flatTokens: Record<string, string>): TokenValue {
-  const resolvedTokens = resolveCSSVariables(flatTokens);
-  const organized: TokenValue = {};
-
-  for (const [key, value] of Object.entries(resolvedTokens)) {
-    organizeTokenDynamically(key, value, organized);
-  }
-
-  return organized;
-}
-
-function organizeTokenDynamically(
-  key: string,
-  value: string,
-  organized: TokenValue,
-): void {
-  const numberedMatch = key.match(/^(.+?)(\d+[a-z]*)$/);
-  if (numberedMatch) {
-    const [, basePart, numberPart] = numberedMatch;
-
-    const parts = basePart.split(/(?=[A-Z])/).map((part) => part.toLowerCase());
-
-    let current = organized;
-
-    for (const part of parts) {
-      if (!current[part]) {
-        current[part] = {};
-      } else if (typeof current[part] === "string") {
-        const existingValue = current[part];
-        current[part] = { default: existingValue };
-      }
-      current = current[part] as TokenValue;
-    }
-
-    current[numberPart] = value;
-    return;
-  }
-
-  const parts = key.split(/(?=[A-Z])/).map((part) => part.toLowerCase());
-
-  if (parts.length === 0) return;
-
-  let current = organized;
-
-  for (let i = 0; i < parts.length - 1; i++) {
-    const part = parts[i];
-
-    if (!current[part]) {
-      current[part] = {};
-    } else if (typeof current[part] === "string") {
-      const existingValue = current[part];
-      current[part] = { default: existingValue };
-    }
-
-    current = current[part] as TokenValue;
-  }
-
-  const finalPart = parts[parts.length - 1];
-
-  const numberMatch = finalPart.match(/^(.+?)(\d+)$/);
-
-  if (numberMatch) {
-    const [, baseName, number] = numberMatch;
-
-    if (!current[baseName]) {
-      current[baseName] = {};
-    } else if (typeof current[baseName] === "string") {
-      const existingValue = current[baseName];
-      current[baseName] = { default: existingValue };
-    }
-
-    const baseGroup = current[baseName] as TokenValue;
-    baseGroup[number] = value;
-  } else {
-    if (current[finalPart] && typeof current[finalPart] === "object") {
-      (current[finalPart] as TokenValue)["default"] = value;
-    } else {
-      current[finalPart] = value;
-    }
-  }
-}
-
-function resolveCSSVariables(
-  flatTokens: Record<string, string>,
-): Record<string, string> {
-  const resolved: Record<string, string> = { ...flatTokens };
-
-  let hasChanges = true;
-  while (hasChanges) {
-    hasChanges = false;
-
-    for (const [key, value] of Object.entries(resolved)) {
-      const varMatch = value.match(/var\(--([^)]+)\)/);
-      if (varMatch) {
-        const varName = varMatch[1];
-        const varKey = convertCSSVariableToKey(`--${varName}`);
-
-        if (resolved[varKey]) {
-          resolved[key] = resolved[varKey];
-          hasChanges = true;
-        }
-      }
-    }
-  }
-
-  return resolved;
-}
-
-function generateTokensFromCSS(): void {
-  try {
-    const cssPath = join(__dirname, "../styles/tokens.css");
-    const cssContent = readFileSync(cssPath, "utf-8");
-
-    const rootMatch = cssContent.match(/:root\s*\{([^}]+)\}/s);
-    if (!rootMatch) {
-      throw new Error("No :root block found in CSS file");
-    }
-
-    const rootContent = rootMatch[1];
-    const propertyRegex = /--([a-z0-9-]+):\s*([^;]+);/gi;
-    const flatTokens: Record<string, string> = {};
-
-    let match;
-    while ((match = propertyRegex.exec(rootContent)) !== null) {
-      const [, property, value] = match;
-      const key = convertCSSVariableToKey(`--${property}`);
-      flatTokens[key] = parseTokenValue(value);
-    }
-
-    const organizedTokens = organizeTokens(flatTokens);
-
-    const formattedTokens = formatTokensForTS(organizedTokens);
-
-    const typeExports = Object.keys(organizedTokens)
-      .map((category) => {
-        const capitalizedCategory =
-          category.charAt(0).toUpperCase() + category.slice(1);
-        return `export type ${capitalizedCategory}Tokens = typeof tokens.${category};`;
-      })
-      .join("\n");
-
-    const tsContent = `export const tokens = ${formattedTokens};
-
-export type Tokens = typeof tokens;
-
-
-${typeExports}
-`;
-
-    const tsPath = join(__dirname, "../styles/tokens.ts");
-    writeFileSync(tsPath, tsContent, "utf-8");
-
-    console.log("✅ Successfully generated tokens.ts from tokens.css");
-    console.log(
-      `📝 Found ${Object.keys(flatTokens).length} CSS custom properties`,
+  lines.push("");
+  for (const shade of VIBRANT_SHADES) {
+    lines.push(
+      `  --color-${name}-vibrant-${shade}: ${color[name].vibrant[shade]};`,
     );
-    console.log(`📁 Generated file: ${tsPath}`);
-  } catch (error) {
-    console.error("❌ Error generating tokens:", error);
-    process.exit(1);
   }
 }
 
-// Run the script
-generateTokensFromCSS();
+lines.push(
+  "",
+  "  /* ----- Padding ----- */",
+  ...Object.entries(padding).map(([name, value]) => `  --padding-${name}: ${value};`),
+  "",
+  "  /* ----- Radius ----- */",
+  ...Object.entries(radius).map(([name, value]) => `  --radius-${name}: ${value};`),
+  "",
+  "  /* ----- Font Sizes ----- */",
+  ...Object.entries(font.size).map(
+    ([name, value]) => `  --font-size-${name}: ${value};`,
+  ),
+  "",
+  ...screenEntries.map(([name, width]) => `  --screen-${name}: ${width};`),
+  "",
+  "  /* ----- Media Queries ----- */",
+  ...screenEntries.map(
+    ([name, width]) => `  --media-min-${name}: @media (min-width: ${width}px);`,
+  ),
+  "",
+  ...screenEntries.map(
+    ([name, width]) =>
+      `  --media-max-${name}: @media (max-width: ${width - 1}px);`,
+  ),
+  "}",
+);
+
+const cssPath = join(__dirname, "../styles/tokens.css");
+const current = readFileSync(cssPath, "utf-8");
+const baseStart = current.indexOf("@layer base");
+if (baseStart === -1) {
+  throw new Error("tokens.css is missing the @layer base block");
+}
+
+const next = `${lines.join("\n")}\n\n${current.slice(baseStart)}`;
+writeFileSync(cssPath, next, "utf-8");
+console.log(`Wrote ${cssPath} from styles/tokens.ts`);

@@ -1,4 +1,4 @@
-/* CSS Custom Properties for Styling-Agnostic Design Tokens */
+/* Generated from styles/tokens.ts. Edit that file, then run pnpm generate-tokens. */
 :root {
   --font-family-sans: "Montserrat", sans-serif;
   --font-family-serif: "Libre Baskerville", serif;
@@ -12,8 +12,8 @@
   --color-text-dark: #040a0c;
   --color-text-light: #fcfbf7;
 
-  --color-background-light: var(--color-text-light);
-  --color-background-dark: var(--color-text-dark);
+  --color-background-light: #fcfbf7;
+  --color-background-dark: #040a0c;
 
   /* ----- Primary ----- */
   --color-primary-50: #f0f2f5;
@@ -21,7 +21,7 @@
   --color-primary-200: #b8c3d1;
   --color-primary-300: #8a9bae;
   --color-primary-400: #4a5f7a;
-  --color-primary-500: #0b1828; /* Base Primary */
+  --color-primary-500: #0b1828;
   --color-primary-600: #081320;
   --color-primary-700: #060e18;
   --color-primary-800: #04090f;
@@ -32,13 +32,12 @@
   --color-primary-vibrant-700: #1e3a8a;
 
   /* ----- Secondary ----- */
-
   --color-secondary-50: #e6f7f6;
   --color-secondary-100: #b3e8e5;
   --color-secondary-200: #80d9d4;
   --color-secondary-300: #4dcac3;
   --color-secondary-400: #2aa39b;
-  --color-secondary-500: #146b68; /* Base Secondary */
+  --color-secondary-500: #146b68;
   --color-secondary-600: #125a57;
   --color-secondary-700: #0f4a47;
   --color-secondary-800: #0c3835;
@@ -54,7 +53,7 @@
   --color-tertiary-200: #e5c8a8;
   --color-tertiary-300: #dcb184;
   --color-tertiary-400: #d19b60;
-  --color-tertiary-500: #bfa081; /* Base Tertiary */
+  --color-tertiary-500: #bfa081;
   --color-tertiary-600: #a68965;
   --color-tertiary-700: #7d6748;
   --color-tertiary-800: #54442c;
@@ -70,7 +69,7 @@
   --color-error-200: #f88080;
   --color-error-300: #f54d4d;
   --color-error-400: #f21a1a;
-  --color-error-500: #9f0001; /* original color */
+  --color-error-500: #9f0001;
   --color-error-600: #800001;
   --color-error-700: #600001;
   --color-error-800: #400000;
@@ -86,7 +85,7 @@
   --color-warning-200: #fad8b3;
   --color-warning-300: #f8c48c;
   --color-warning-400: #f5b065;
-  --color-warning-500: #f39c12; /* original color */
+  --color-warning-500: #f39c12;
   --color-warning-600: #c27d0e;
   --color-warning-700: #925e0b;
   --color-warning-800: #613e07;
@@ -102,7 +101,7 @@
   --color-success-200: #a3d8ca;
   --color-success-300: #76c5af;
   --color-success-400: #48b195;
-  --color-success-500: #1a9e7a; /* original color */
+  --color-success-500: #1a9e7a;
   --color-success-600: #157e62;
   --color-success-700: #105f49;
   --color-success-800: #0a3f31;
@@ -120,7 +119,6 @@
   --padding-xl: 16px;
 
   /* ----- Radius ----- */
-
   --radius-sm: 3px;
   --radius-md: 5px;
   --radius-lg: 8px;
@@ -146,7 +144,6 @@
   --screen-4xl: 1536;
 
   /* ----- Media Queries ----- */
-  /* Only useful for CSS-in-JS media query handling */
   --media-min-xs: @media (min-width: 320px);
   --media-min-sm: @media (min-width: 480px);
   --media-min-md: @media (min-width: 620px);
@@ -154,14 +151,16 @@
   --media-min-xl: @media (min-width: 896px);
   --media-min-2xl: @media (min-width: 1024px);
   --media-min-3xl: @media (min-width: 1280px);
+  --media-min-4xl: @media (min-width: 1536px);
 
   --media-max-xs: @media (max-width: 319px);
   --media-max-sm: @media (max-width: 479px);
-  --media-max-md: @media (max-width: 767px);
-  --media-max-lg: @media (max-width: 895px);
-  --media-max-xl: @media (max-width: 1023px);
-  --media-max-2xl: @media (max-width: 1279px);
-  --media-max-3xl: @media (max-width: 1535px);
+  --media-max-md: @media (max-width: 619px);
+  --media-max-lg: @media (max-width: 767px);
+  --media-max-xl: @media (max-width: 895px);
+  --media-max-2xl: @media (max-width: 1023px);
+  --media-max-3xl: @media (max-width: 1279px);
+  --media-max-4xl: @media (max-width: 1535px);
 }
 
 @layer base {

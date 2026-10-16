@@ -8,14 +8,19 @@ type MainProps = {
     main?: string | false | null | undefined;
     mainContent?: string | false | null | undefined;
   };
-
+  width?: "full" | "wide" | "medium" | "narrow";
   sx?: {
     main?: CSSObject;
     mainContent?: CSSObject;
   };
 };
 
-export const Main = ({ children, className, sx }: MainProps) => {
+export const Main = ({
+  children,
+  className,
+  sx,
+  width = "wide",
+}: MainProps) => {
   const mainClasses = cx(
     "ath-main",
     typeof className === "object" && className !== null ? className.main : "",
@@ -26,6 +31,10 @@ export const Main = ({ children, className, sx }: MainProps) => {
     typeof className === "object" && className !== null
       ? className.mainContent
       : "",
+    width === "full" ? "full" : "",
+    width === "wide" ? "wide" : "",
+    width === "medium" ? "medium" : "",
+    width === "narrow" ? "narrow" : "",
   );
 
   return (
