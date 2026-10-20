@@ -11,6 +11,7 @@ type FormTextInputProps = {
   disabled?: boolean;
   error?: string;
   id?: string;
+  inputMode?: React.HTMLAttributes<HTMLInputElement>["inputMode"];
   name?: string;
   placeholder?: string;
   readOnly?: boolean;
@@ -31,6 +32,8 @@ type FormTextInputProps = {
   value?: string | number;
 
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: React.FocusEventHandler<HTMLInputElement>;
+  onFocus?: React.FocusEventHandler<HTMLInputElement>;
   onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
 };
 
@@ -42,6 +45,7 @@ export const FormTextInput = ({
   error,
   disabled,
   id,
+  inputMode,
   name,
   placeholder,
   readOnly,
@@ -52,6 +56,8 @@ export const FormTextInput = ({
   value,
 
   onChange,
+  onBlur,
+  onFocus,
   onKeyDown,
   ...other
 }: FormTextInputProps) => {
@@ -79,12 +85,15 @@ export const FormTextInput = ({
       css={sx?.input}
       disabled={disabled}
       name={name}
+      inputMode={inputMode}
       placeholder={placeholder}
       readOnly={readOnly}
       tabIndex={disabled ? -1 : tabIndex}
       type={type}
       value={value}
       onChange={onChangeHandler}
+      onBlur={onBlur}
+      onFocus={onFocus}
       onKeyDown={onKeyDown}
       id={id}
       {...other}

@@ -35,6 +35,7 @@ export type ButtonProps = {
   onClick?: MouseEventHandler<HTMLButtonElement>;
   onFocus?: (event: React.FocusEvent<HTMLButtonElement>) => void;
   onKeyDown?: KeyboardEventHandler<HTMLButtonElement>;
+  onMouseDown?: MouseEventHandler<HTMLButtonElement>;
   onMouseEnter?: MouseEventHandler<HTMLButtonElement>;
   onMouseLeave?: MouseEventHandler<HTMLButtonElement>;
 };
@@ -59,6 +60,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       onClick,
       onFocus,
       onKeyDown,
+      onMouseDown,
       onMouseEnter,
       onMouseLeave,
       ...other
@@ -100,6 +102,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       onBlur?.(e);
     };
 
+    const onMouseDownHandler: MouseEventHandler<HTMLButtonElement> = (e) => {
+      onMouseDown?.(e);
+    };
+
     const onMouseEnterHandler: MouseEventHandler<HTMLButtonElement> = (e) => {
       onMouseEnter?.(e);
     };
@@ -122,6 +128,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         onBlur={onBlurHandler}
         onMouseEnter={onMouseEnterHandler}
         onMouseLeave={onMouseLeaveHandler}
+        onMouseDown={onMouseDownHandler}
         {...other}
       >
         {icon ? (

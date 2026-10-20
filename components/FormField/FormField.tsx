@@ -23,6 +23,7 @@ export type FormFieldProps = {
   error?: string;
   helperText?: string | ReactNode;
   id?: string;
+  inputMode?: React.HTMLAttributes<HTMLInputElement>["inputMode"];
   label?: string | ReactNode;
   labelPosition?: "left" | "right" | "above" | "below";
   name?: string;
@@ -57,6 +58,8 @@ export type FormFieldProps = {
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLTextAreaElement>,
   ) => void;
+  onBlur?: React.FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+  onFocus?: React.FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   onKeyDown?: React.KeyboardEventHandler<
     HTMLInputElement | HTMLTextAreaElement
   >;
@@ -72,6 +75,7 @@ export const FormField: React.FC<FormFieldProps> = ({
   error,
   helperText,
   id,
+  inputMode,
   label,
   labelPosition = "above",
   name,
@@ -85,6 +89,8 @@ export const FormField: React.FC<FormFieldProps> = ({
   value,
 
   onChange,
+  onBlur,
+  onFocus,
   onKeyDown,
   ...other
 }) => {
@@ -177,6 +183,8 @@ export const FormField: React.FC<FormFieldProps> = ({
         onChange={handleTextAreaChange}
         disabled={disabled}
         readOnly={readOnly}
+        onBlur={onBlur}
+        onFocus={onFocus}
         onKeyDown={onKeyDown}
         tabIndex={disabled ? -1 : tabIndex}
         className={textAreaClasses}
@@ -190,10 +198,13 @@ export const FormField: React.FC<FormFieldProps> = ({
         autoComplete={autoComplete}
         autoFocus={autoFocus}
         name={name}
+        inputMode={inputMode}
         type={type}
         onChange={handleInputChange}
         disabled={disabled}
         readOnly={readOnly}
+        onBlur={onBlur}
+        onFocus={onFocus}
         onKeyDown={onKeyDown}
         tabIndex={disabled ? -1 : tabIndex}
         className={{ input: inputClasses }}

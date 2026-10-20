@@ -1,0 +1,60 @@
+@import "../tokens.css";
+
+@layer components {
+  .ath-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    color: var(--color-primary-900);
+  }
+
+  .ath-checkbox-dark {
+    color: var(--color-tertiary-50);
+  }
+
+  .ath-checkbox-disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+
+  .ath-checkbox-input {
+    appearance: none;
+    flex: 0 0 auto;
+    width: 1.125rem;
+    height: 1.125rem;
+    margin: 0;
+    border: 2px solid var(--color-tertiary-500);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    display: grid;
+    place-content: center;
+  }
+
+  .ath-checkbox-input:focus-visible {
+    outline: 2px solid var(--color-primary-vibrant-500);
+    outline-offset: 2px;
+  }
+
+  .ath-checkbox-input:checked {
+    background: var(--color-primary-vibrant-500);
+    border-color: var(--color-primary-vibrant-500);
+  }
+
+  .ath-checkbox-input:checked::after {
+    content: "";
+    width: 0.3rem;
+    height: 0.55rem;
+    border: solid var(--color-primary-50);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg) translate(-1px, -1px);
+  }
+
+  .ath-checkbox-input:disabled {
+    cursor: not-allowed;
+  }
+
+  .ath-checkbox-label {
+    line-height: 1.4;
+  }
+}
