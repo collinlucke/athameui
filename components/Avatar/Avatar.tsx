@@ -34,7 +34,12 @@ export const Avatar = ({
   // const imageClasses = cx(".ath-avatar-image", className?.image);
 
   return (
-    <div css={sx?.avatar} className={avatarClasses}>
+    <div
+      css={sx?.avatar}
+      className={avatarClasses}
+      role="img"
+      aria-label={displayName}
+    >
       <div css={sx?.initials} className={initialsClasses}>
         {initials[0]}
         {initials[1]}

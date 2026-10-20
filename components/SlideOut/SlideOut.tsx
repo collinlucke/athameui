@@ -1,6 +1,7 @@
 import { CSSObject } from "@emotion/react";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { CancelCircleIcon } from "@hugeicons/core-free-icons";
+import { useEffect, useRef } from "react";
 import { cx } from "../../utils/cx";
 import { Button } from "../Button/Button";
 
@@ -49,11 +50,39 @@ export const SlideOut = ({
     "ath-slide-out-close-button",
     className?.closeButton,
   );
+  const slideOutRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const element = slideOutRef.current;
+    if (!element) return;
+    if (isOpen) element.removeAttribute("inert");
+    else element.setAttribute("inert", "");
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, onClose]);
 
   return (
-    <div className={slideOutClasses} css={sx?.slideOut} data-testid="slide-out">
+    <div
+      ref={slideOutRef}
+      className={slideOutClasses}
+      css={sx?.slideOut}
+      data-testid="slide-out"
+    >
       <div className={overlayClasses} css={sx?.overlay} onClick={onClose} />
-      <div className={panelClasses} css={sx?.panel}>
+      <div
+        className={panelClasses}
+        css={sx?.panel}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu"
+      >
         <Button
           className={{ button: closeButtonClasses }}
           sx={{ button: sx?.closeButton }}

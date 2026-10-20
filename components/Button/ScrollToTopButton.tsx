@@ -50,7 +50,8 @@ export const ScrollToTopButton = ({
       data-testid="ath-scroll-to-top-button"
       onClick={scrollToTop}
       variant={variant ?? "secondary"}
-      title={title ?? "Back to Top"}
+      title={title ?? "Back to top"}
+      aria-label="Back to top"
       dark={dark}
     >
       <HugeiconsIcon icon={CircleArrowUp02Icon} width="50" height="50" />

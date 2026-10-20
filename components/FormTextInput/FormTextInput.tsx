@@ -2,6 +2,8 @@ import { CSSObject } from "@emotion/react";
 import { cx } from "../../utils/cx";
 
 type FormTextInputProps = {
+  "aria-describedby"?: string;
+  "aria-invalid"?: boolean;
   autoComplete?: string;
   autoFocus?: boolean;
   className?: {

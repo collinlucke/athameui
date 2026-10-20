@@ -103,14 +103,20 @@ export const AccordionItem = ({
           textPosition={headingTextPosition}
           onClick={onToggleHandler}
           disabled={disabled}
+          aria-expanded={expanded}
+          aria-controls={`accordion-content-${item.id}`}
           sx={sx?.accordionHeading}
           dark
         >
           <div className={titleClasses}>{item.heading}</div>
         </Button>
         <div
+          id={`accordion-content-${item.id}`}
           className={expansionClasses}
-          style={{ height: expanded ? contentHeight : 0 }}
+          style={{
+            height: expanded ? contentHeight : 0,
+            visibility: expanded ? "visible" : "hidden",
+          }}
         >
           <div ref={contentRef} className={contentWrapperClasses}>
             {item.content}

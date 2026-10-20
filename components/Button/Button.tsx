@@ -30,6 +30,10 @@ export type ButtonProps = {
   type?: "button" | "submit" | "reset";
   variant?: ButtonVariant;
   wrap?: boolean;
+  "aria-controls"?: string;
+  "aria-expanded"?: boolean;
+  "aria-label"?: string;
+  "aria-pressed"?: boolean;
 
   onBlur?: (event: React.FocusEvent<HTMLButtonElement>) => void;
   onClick?: MouseEventHandler<HTMLButtonElement>;

@@ -143,6 +143,9 @@ export const Carousel = ({
           <Button
             className={{ button: "ath-carousel-arrow ath-carousel-left-arrow" }}
             onClick={() => scrollByPage(-1)}
+            aria-label={
+              label ? `Scroll ${label} backward` : "Scroll backward"
+            }
             icon={<HugeiconsIcon icon={ArrowLeftIcon} size={36} />}
           />
         )}
@@ -197,6 +200,7 @@ export const Carousel = ({
               button: "ath-carousel-arrow ath-carousel-right-arrow",
             }}
             onClick={() => scrollByPage(1)}
+            aria-label={label ? `Scroll ${label} forward` : "Scroll forward"}
             icon={<HugeiconsIcon icon={ArrowRightIcon} size={36} />}
           />
         )}

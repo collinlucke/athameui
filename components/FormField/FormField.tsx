@@ -173,13 +173,24 @@ export const FormField: React.FC<FormFieldProps> = ({
     />
   ) : null;
 
+  const describedBy =
+    [
+      error && name ? `${name}-error` : "",
+      helperText && name ? `${name}-helper` : "",
+    ]
+      .filter(Boolean)
+      .join(" ") || undefined;
+
   const inputElement =
     type === "textarea" ? (
       <textarea
         autoComplete={autoComplete}
         autoFocus={autoFocus}
         ref={textAreaRef}
+        id={id}
         name={name}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={describedBy}
         onChange={handleTextAreaChange}
         disabled={disabled}
         readOnly={readOnly}
@@ -213,6 +224,8 @@ export const FormField: React.FC<FormFieldProps> = ({
         placeholder={placeholder}
         size={size}
         id={id}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={describedBy}
         {...other}
       />
     );

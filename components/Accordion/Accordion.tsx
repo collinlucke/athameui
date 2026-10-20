@@ -80,29 +80,29 @@ export const Accordion = ({
     <div className={accordionClasses} css={sx?.accordion}>
       {childrenFirst && children}
       <List>
-        {items.map((item) => (
-          <div key={item.id}>
-            {CustomAccordionItem ? (
-              <CustomAccordionItem
-                expanded={expandedItems.includes(item.id)}
-                onToggle={expandToggle}
-                {...item}
-              />
-            ) : (
-              <AccordionItem
-                sx={sx}
-                item={item}
-                expanded={expandedItems.includes(item.id)}
-                onToggle={expandToggle}
-                className={
-                  className?.accordionItem
-                    ? { ...className.accordionItem }
-                    : undefined
-                }
-              />
-            )}
-          </div>
-        ))}
+        {items.map((item) =>
+          CustomAccordionItem ? (
+            <CustomAccordionItem
+              key={item.id}
+              expanded={expandedItems.includes(item.id)}
+              onToggle={expandToggle}
+              {...item}
+            />
+          ) : (
+            <AccordionItem
+              key={item.id}
+              sx={sx}
+              item={item}
+              expanded={expandedItems.includes(item.id)}
+              onToggle={expandToggle}
+              className={
+                className?.accordionItem
+                  ? { ...className.accordionItem }
+                  : undefined
+              }
+            />
+          ),
+        )}
       </List>
       {!childrenFirst && children}
     </div>

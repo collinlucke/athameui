@@ -52,6 +52,9 @@ export const Modal: React.FC<ModalProps> = ({
   trapFocus = true,
   initialFocusRef,
   finalFocusRef,
+  ariaLabel,
+  ariaLabelledBy,
+  ariaDescribedBy,
   sx,
 
   onClose,
@@ -176,6 +179,10 @@ export const Modal: React.FC<ModalProps> = ({
         css={sx?.modal}
         className={modalClasses}
         role="dialog"
+        aria-modal="true"
+        aria-labelledby={ariaLabelledBy || titleId}
+        aria-label={ariaLabelledBy || titleId ? undefined : ariaLabel}
+        aria-describedby={ariaDescribedBy}
         {...other}
       >
         {(title || showCloseButton) && (
