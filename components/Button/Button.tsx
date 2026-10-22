@@ -138,7 +138,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {icon ? (
           <div className="ath-button-icon-container">
-            {SizedIcon}
+            {icon}
             {!isIconOnly && <div>{children}</div>}
           </div>
         ) : (

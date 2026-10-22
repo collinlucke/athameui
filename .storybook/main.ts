@@ -12,11 +12,5 @@ const config: StorybookConfig = {
   typescript: {
     reactDocgen: "react-docgen-typescript",
   },
-  viteFinal: async (config) => {
-    if (process.env.NODE_ENV === "production") {
-      config.base = "/athameui/storybook/";
-    }
-    return config;
-  },
 };
 export default config;
