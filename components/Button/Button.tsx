@@ -119,6 +119,27 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       onMouseLeave?.(e);
     };
 
+    const SizedIcon = icon
+      ? React.cloneElement(icon as ReactElement, {
+          width:
+            size === "small"
+              ? 16
+              : size === "medium"
+                ? 24
+                : size === "large"
+                  ? 32
+                  : 32,
+          height:
+            size === "small"
+              ? 16
+              : size === "medium"
+                ? 24
+                : size === "large"
+                  ? 32
+                  : 32,
+        })
+      : null;
+
     return (
       <button
         ref={ref}
@@ -138,7 +159,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {icon ? (
           <div className="ath-button-icon-container">
-            {icon}
+            {SizedIcon}
             {!isIconOnly && <div>{children}</div>}
           </div>
         ) : (

@@ -53,8 +53,8 @@ export const ScrollToTopButton = ({
       title={title ?? "Back to top"}
       aria-label="Back to top"
       dark={dark}
-    >
-      <HugeiconsIcon icon={CircleArrowUp02Icon} width="50" height="50" />
-    </Button>
+      size="large"
+      icon={<HugeiconsIcon icon={CircleArrowUp02Icon} width="50" height="50" />}
+    />
   );
 };

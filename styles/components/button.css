@@ -86,13 +86,8 @@
     line-height: var(--font-size-md);
     padding: 6px 15px;
 
-    &.iconOnly {
+    &.ath-button-icon-only {
       padding: 6px;
-    }
-
-    &svg {
-      width: 16px;
-      height: 16px;
     }
   }
 
@@ -101,18 +96,8 @@
     line-height: var(--font-size-lg);
     padding: 8px 15px;
 
-    &.ath-button-icon {
-      padding-top: 6px;
-      padding-bottom: 6px;
-    }
-
-    &.iconOnly {
+    &.ath-button-icon-only {
       padding: 8px;
-    }
-
-    &svg {
-      width: 24px;
-      height: 24px;
     }
   }
 
@@ -121,13 +106,8 @@
     line-height: var(--font-size-xl);
     padding: 10px 40px;
 
-    &.iconOnly {
+    &.ath-button-icon-only {
       padding: 10px;
-    }
-
-    &svg {
-      width: 24px;
-      height: 24px;
     }
   }
 
@@ -137,10 +117,6 @@
     width: 100%;
     justify-content: center;
     padding: 10px 40px;
-
-    &.iconOnly {
-      padding: 10px;
-    }
   }
 
   .ath-button-primary {
@@ -209,10 +185,6 @@
   .ath-button-text-right {
     padding-right: 0;
     justify-content: flex-end;
-  }
-
-  .ath-button-icon-only {
-    padding: 0;
   }
 
   /* ----- ScrollToTopButton Styles ----- */
