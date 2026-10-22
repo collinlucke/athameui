@@ -1,5 +1,5 @@
 "use client";
-import { forwardRef } from "react";
+import React, { forwardRef } from "react";
 import type {
   KeyboardEventHandler,
   MouseEventHandler,
@@ -78,6 +78,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       buttonVariants.size[size],
       buttonVariants.variant[variant],
       isIconOnly ? "ath-button-icon-only" : "",
+      icon ? "ath-button-icon" : "",
       dark ? buttonVariants.dark : "",
       wrap ? buttonVariants.wrap : "",
     );
@@ -136,12 +137,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {...other}
       >
         {icon ? (
-          <>
-            {icon}
-            {!isIconOnly && children}
-          </>
+          <div className="ath-button-icon-container">
+            {SizedIcon}
+            {!isIconOnly && <div>{children}</div>}
+          </div>
         ) : (
-          <>{children}</>
+          <div>{children}</div>
         )}
       </button>
     );

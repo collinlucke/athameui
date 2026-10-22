@@ -6,7 +6,9 @@
     height: fit-content;
     cursor: pointer;
     display: flex;
+    flex-direction: row;
     align-items: center;
+    justify-content: center;
 
     transition:
       box-shadow 0.2s ease-in-out,
@@ -45,6 +47,14 @@
     }
   }
 
+  .ath-button-icon-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
   .ath-button-dark {
     &:hover {
       box-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
@@ -72,7 +82,7 @@
   }
 
   .ath-button-small {
-    font-size: var(--font-size-md);
+    font-size: var(--font-size-sm);
     line-height: var(--font-size-md);
     padding: 6px 15px;
 
@@ -80,9 +90,9 @@
       padding: 6px;
     }
 
-    &.buttonSVGIcon {
-      width: 15px;
-      height: 15px;
+    &svg {
+      width: 16px;
+      height: 16px;
     }
   }
 
@@ -91,13 +101,18 @@
     line-height: var(--font-size-lg);
     padding: 8px 15px;
 
+    &.ath-button-icon {
+      padding-top: 6px;
+      padding-bottom: 6px;
+    }
+
     &.iconOnly {
       padding: 8px;
     }
 
-    &.buttonSVGIcon {
-      width: 15px;
-      height: 15px;
+    &svg {
+      width: 24px;
+      height: 24px;
     }
   }
 
@@ -110,26 +125,21 @@
       padding: 10px;
     }
 
-    &.buttonSVGIcon {
-      width: 40px;
-      height: 40px;
+    &svg {
+      width: 24px;
+      height: 24px;
     }
   }
 
   .ath-button-full {
     font-size: var(--font-size-lg);
     line-height: var(--font-size-xl);
-    /* width: 100%; */
+    width: 100%;
     justify-content: center;
     padding: 10px 40px;
 
     &.iconOnly {
       padding: 10px;
-    }
-
-    &.buttonSVGIcon {
-      width: 40px;
-      height: 40px;
     }
   }
 

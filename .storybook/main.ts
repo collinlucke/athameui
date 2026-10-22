@@ -1,10 +1,7 @@
-// import { mergeConfig } from "vite";
-// import postcssNesting from "postcss-nesting";
 import type { StorybookConfig } from "@storybook/react-vite";
 
 const config: StorybookConfig = {
   stories: ["../components/**/stories/*.stories.@(js|ts|jsx|tsx|mdx)"],
-  staticDirs: ["../dist"],
   addons: [
     "@chromatic-com/storybook",
     "@storybook/addon-vitest",
