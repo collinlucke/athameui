@@ -7,9 +7,9 @@ import type { AccordionItemType } from "./AccordionItem";
 import { cx } from "../../utils/cx";
 
 type AccordionProps = {
-  children?: React.ReactNode;
+  aboveContent?: React.ReactNode;
+  belowContent?: React.ReactNode;
   items: AccordionItemType[];
-  childrenFirst?: boolean;
   expand?: "one" | "any";
   sx?: {
     accordion: CSSObject;
@@ -44,10 +44,10 @@ type AccordionProps = {
 };
 
 export const Accordion = ({
-  children,
+  aboveContent,
+  belowContent,
   className,
   items,
-  childrenFirst,
   expand = "one",
   sx,
 
@@ -77,34 +77,40 @@ export const Accordion = ({
   };
 
   return (
-    <div className={accordionClasses} css={sx?.accordion}>
-      {childrenFirst && children}
-      <List>
-        {items.map((item) =>
-          CustomAccordionItem ? (
-            <CustomAccordionItem
-              key={item.id}
-              expanded={expandedItems.includes(item.id)}
-              onToggle={expandToggle}
-              {...item}
-            />
-          ) : (
-            <AccordionItem
-              key={item.id}
-              sx={sx}
-              item={item}
-              expanded={expandedItems.includes(item.id)}
-              onToggle={expandToggle}
-              className={
-                className?.accordionItem
-                  ? { ...className.accordionItem }
-                  : undefined
-              }
-            />
-          ),
-        )}
-      </List>
-      {!childrenFirst && children}
-    </div>
+    <>
+      {aboveContent ? (
+        <div className="ath-accordion-above">{aboveContent}</div>
+      ) : null}
+      <div className={accordionClasses} css={sx?.accordion}>
+        <List>
+          {items.map((item) =>
+            CustomAccordionItem ? (
+              <CustomAccordionItem
+                key={item.id}
+                expanded={expandedItems.includes(item.id)}
+                onToggle={expandToggle}
+                {...item}
+              />
+            ) : (
+              <AccordionItem
+                key={item.id}
+                sx={sx}
+                item={item}
+                expanded={expandedItems.includes(item.id)}
+                onToggle={expandToggle}
+                className={
+                  className?.accordionItem
+                    ? { ...className.accordionItem }
+                    : undefined
+                }
+              />
+            ),
+          )}
+        </List>
+      </div>
+      {belowContent ? (
+        <div className="ath-accordion-below">{belowContent}</div>
+      ) : null}
+    </>
   );
 };

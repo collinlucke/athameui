@@ -42,6 +42,14 @@
     }
   }
 
+  .ath-accordion-above {
+    margin-bottom: 1rem;
+  }
+
+  .ath-accordion-below {
+    margin-top: 1rem;
+  }
+
   .ath-accordion-item {
     width: 100%;
     border-bottom: 1px solid var(--color-primary-200);
