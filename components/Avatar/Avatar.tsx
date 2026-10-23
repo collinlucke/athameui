@@ -7,20 +7,20 @@ type AvatarProps = {
   className?: {
     avatar?: string;
     initials?: string;
-    // image?: string;
+    image?: string;
   };
   size?: "small" | "medium" | "large" | "profile";
   sx?: {
     avatar?: CSSObject;
     initials?: CSSObject;
-    // image?: CSSObject;
+    image?: CSSObject;
   };
 };
 
-// TODO: Add images later
 export const Avatar = ({
   className,
   displayName = "Display Name",
+  imageUrl,
   sx,
   size = "medium",
 }: AvatarProps) => {
@@ -30,8 +30,8 @@ export const Avatar = ({
     `ath-avatar-${size}`,
     className?.avatar,
   );
-  const initialsClasses = cx(`ath-avatar-initials`, className?.initials);
-  // const imageClasses = cx(".ath-avatar-image", className?.image);
+  const initialsClasses = cx("ath-avatar-initials", className?.initials);
+  const imageClasses = cx("ath-avatar-image", className?.image);
 
   return (
     <div
@@ -40,10 +40,13 @@ export const Avatar = ({
       role="img"
       aria-label={displayName}
     >
-      <div css={sx?.initials} className={initialsClasses}>
-        {initials[0]}
-        {initials[1]}
-      </div>
+      {imageUrl ? (
+        <img src={imageUrl} alt="" css={sx?.image} className={imageClasses} />
+      ) : (
+        <div css={sx?.initials} className={initialsClasses}>
+          {initials}
+        </div>
+      )}
     </div>
   );
 };

@@ -9,6 +9,7 @@
     border-radius: 50%;
     color: var(--color-tertiary-100);
     font-weight: 500;
+    overflow: hidden;
   }
 
   .ath-avatar-small {
